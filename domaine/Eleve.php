@@ -1,13 +1,22 @@
 <?php
 
 
-class Enfant
+class Eleve
 {
     private $nom;
     private $prenom;
+    private $numClassePrec;
     private $datenaissance;
-    private $parent1;
-    private $parent2;
+    private $lieuNaissance;
+    private $pere;
+    private $mere;
+    private $parentsSepares; // true ou false
+    private $adresse;
+    private $ville;
+    private $codePostale;
+    private $email;
+    private $autoriserRentrerSeul; // true ou false
+    private $autoriserPhotographie; // true ou false
 
     /**
      * Enfant constructor.
@@ -22,8 +31,8 @@ class Enfant
         $this->nom = $nom;
         $this->prenom = $prenom;
         $this->datenaissance = $datenaissance;
-        $this->parent1 = $parent1;
-        $this->parent2 = $parent2;
+        $this->pere = $parent1;
+        $this->mere = $parent2;
     }
 
     /**
@@ -83,36 +92,36 @@ class Enfant
     /**
      * @return mixed
      */
-    public function getParent1()
+    public function getPere()
     {
-        return $this->parent1;
+        return $this->pere;
     }
 
     /**
-     * @param mixed $parent1
+     * @param mixed $pere
      * @return Enfant
      */
-    public function setParent1($parent1)
+    public function setPere($pere)
     {
-        $this->parent1 = $parent1;
+        $this->pere = $pere;
         return $this;
     }
 
     /**
      * @return mixed
      */
-    public function getParent2()
+    public function getMere()
     {
-        return $this->parent2;
+        return $this->mere;
     }
 
     /**
-     * @param mixed $parent2
+     * @param mixed $mere
      * @return Enfant
      */
-    public function setParent2($parent2)
+    public function setMere($mere)
     {
-        $this->parent2 = $parent2;
+        $this->mere = $mere;
         return $this;
     }
 

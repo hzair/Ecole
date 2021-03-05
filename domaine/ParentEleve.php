@@ -10,6 +10,7 @@ class ParentEleve
     private $telephonePortable;
     private $telephoneFixe;
     private $fonction;
+    private $sexe; // M: masculin, F: feminin
 
     /**
      * ParentEleve constructor.

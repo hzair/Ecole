@@ -4,6 +4,7 @@
 class Inscription
 {
     private $dateInscription;
+    private $lieuInscription
     private $compte;
     private $eleves; // une liste d'Enfants 1..n
 
