@@ -11,7 +11,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
     $nom = $_POST['nom'];
     $prenom = $_POST['prenom'];
-    $dateNaissance = $_POST['dateNaissance'];
+    $dateNaissance = $_POST['dateNaissance']; // format : yyyy-mm-jj
     $lieuNaissance = $_POST['lieuNaissance'];
     $sexe = $_POST['sexe'];
     $idInscription = $_POST['idInscription'];
@@ -24,7 +24,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $paramObligatoire = null;
     if ($nom == null) $paramObligatoire = "nom";
     if ($prenom == null) $paramObligatoire = $paramObligatoire ." prenom";
-    if ($dateNaissance == null) $paramObligatoire = $paramObligatoire ." dateNaissance";
+    if ($dateNaissance == null) $paramObligatoire = $paramObligatoire ." dateNaissance(ex:yyyy-mm-jj)";
     if ($lieuNaissance == null) $paramObligatoire = $paramObligatoire ." lieuNaissance";
     if ($sexe == null) $paramObligatoire = $paramObligatoire ." sexe";
     if ($idInscription == null) $paramObligatoire = $paramObligatoire ." idInscription";
