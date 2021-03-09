@@ -1,12 +1,9 @@
 <?php
 if($_SERVER['REQUEST_METHOD'] == 'GET'){
+    require_once(__DIR__ . "/../conf/Config.php");
     include("../datasource/connectToBdd.php");
 
-    $serveur_ = 'localhost:3306';
-    $login_ = 'ecole';
-    $motdepasse_ = 'ecole';
-    $nom_base_ = 'ecole';
-    $mysqli = new mysqli($serveur_, $login_, $motdepasse_, $nom_base_);
+    $mysqli = new mysqli(USE_SERVER_BDD, USE_LOGIN_BDD, USE_PASS_BDD, USE_NAME_BDD);
 
     // vérification de l'existence de l'inscription en bdd
     $findSql="select * from inscription";
