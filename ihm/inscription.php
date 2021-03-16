@@ -220,7 +220,7 @@
           // 1 - verifier que nbrEnfants est un nombre
           var nbr = document.forms["inscription"]["nbrEnfants"].value;
           if (isNaN(nbr)) {
-            alert("!! Vous devez renseigner un nombre d'enfants !!");
+            alert("Must input numbers");
             return false;
           }
         }
@@ -245,7 +245,7 @@
       <form id="inscription" name="inscription" action="../domaine/inscription.php" onsubmit="return checkInputForm()">
 
 
-        <!-- Creation Inscription avec information parent -->
+        <!-- INFORMATIONS GENERALE -->
         <section id="parents" class="dark">
         <header class="title">
           <h2>RENSEIGNEMENTS - <span>PARENTS</span></h2>
@@ -272,10 +272,10 @@
                   </div>
                   <div class="col-md-12">
                     Voulez-vous inscrir au cours <select id="coursAdultPere" name="coursAdultPere" class="form-control">
-                                                  <option value="NON" class="backgroundBlackColor" selected>NON</option>
-                                                  <option value="coursArabeAdulte" class="backgroundBlackColor" >Arabe adulte</option>
-                                                  <option value="coursSciencesIslamiques" class="backgroundBlackColor" >Sciences islamiques</option>
-                                                  <option value="coursLesDeux" class="backgroundBlackColor" >Arabe adulte & sciences islamiques</option>
+                                                  <option value="NON" class="form-control" selected>NON</option>
+                                                  <option value="coursArabeAdulte" class="form-control" >Arabe adulte</option>
+                                                  <option value="coursSciencesIslamiques" class="form-control" >Sciences islamiques</option>
+                                                  <option value="coursLesDeux" class="form-control" >Arabe adulte & sciences islamiques</option>
                                                 </select>
                   </div>
 
@@ -296,18 +296,18 @@
                   </div>
                   <div class="col-md-12">
                     Voulez-vous inscrir au cours <select id="coursAdultMere" name="coursAdultPere" class="form-control">
-                                                    <option value="NON" class="backgroundBlackColor" selected>NON</option>
-                                                    <option value="coursArabeAdulte" class="backgroundBlackColor" >Arabe adulte</option>
-                                                    <option value="coursSciencesIslamiques" class="backgroundBlackColor" >Sciences islamiques</option>
-                                                    <option value="coursLesDeux" class="backgroundBlackColor" >Arabe adulte & sciences islamiques</option>
+                                                    <option value="NON" class="form-control" selected>NON</option>
+                                                    <option value="coursArabeAdulte" class="form-control" >Arabe adulte</option>
+                                                    <option value="coursSciencesIslamiques" class="form-control" >Sciences islamiques</option>
+                                                    <option value="coursLesDeux" class="form-control" >Arabe adulte & sciences islamiques</option>
                                                   </select>
                   </div>
 
                   <div class="col-md-4">
                     <br/>
                     Parents séparés <select id="parentsSepare" name="parentsSepare" class="form-control">
-                                      <option value="valeur1" class="backgroundBlackColor">OUI</option>
-                                      <option value="valeur2" class="backgroundBlackColor" selected>NON</option>
+                                      <option value="valeur1" class="form-control">OUI</option>
+                                      <option value="valeur2" class="form-control" selected>NON</option>
                                     </select>
                   </div>
                   <div class="col-md-4">
@@ -319,6 +319,7 @@
                     Téléphone fixe <input type="tel" name="telephoneFixe" class="form-control" placeholder="Téléphone fixe">
                   </div>
                   <div class="col-md-12">
+                    <br/>
                     Adresse postale <input type="text" name="adressePostale" class="form-control" placeholder="Adresse postale" required>
                   </div>
                   <div class="col-md-6">
@@ -327,25 +328,16 @@
                   <div class="col-md-6">
                     Ville <input type="text" name="ville" class="form-control" rows="1" placeholder="Ville" required>
                   </div>
-      <!--            <div class="col-md-12">
+                  <div class="col-md-12">
                     <br/>
-                    Nombre d'enfants que vous souhaiez inscrir
-                    <select id="nbrEnfants" name="nbrEnfants" class="form-control">
-                      <option class="form-control" selected>--</option>
-                      <option value="1" class="form-control" >1</option>
-                      <option value="2" class="form-control" >2</option>
-                      <option value="3" class="form-control" >3</option>
-                      <option value="4" class="form-control" >4</option>
-                      <option value="5" class="form-control" >5</option>
-                      <option value="6" class="form-control" >6</option>
-                    </select>
+                    Nombre d'enfants que vous souhaiez inscrir <input type="number" id="nbrEnfants" name="nbrEnfants" class="form-control" on="alert('message')" required>
                   </div>
-       -->
+
                 </div>
-                <div class="col-md-12">
-                  </br>
-                  <button class="btn btn-default submit">Envoyer</button>
-                </div>
+              <div class="col-md-12">
+                <br/><br/>
+                <span> <a href="#eleves">Etape suivante >></a> </span>
+              </div>
             </div>
 
            <!--
@@ -361,12 +353,251 @@
         </div>
       </section>
 
+        <!-- ELEVES -->
+        <section id="eleves" class="dark">
+        <header class="title">
+          <h2>RENSEIGNEMENTS - <span>ENFANTS</span></h2>
+          <p>Les champs avec * sont obligatoires </p>
+        </header>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12 animated" data-animate="fadeInLeft">
+              <div class="row">
+                <div class="col-md-4">
+                  Nom de l'élève <input type="text" name="nomEleve1" class="form-control" placeholder="Nom de l'élève ...">
+                </div>
+                <div class="col-md-4">
+                  Prémon de l'élève <input type="text" name="prenomEleve1" class="form-control" placeholder="Prémon de l'élève ...">
+                </div>
+                <div class="col-md-4">
+                  Sexe <select id="sexeEleve1" name="sexeEleve1" class="form-control">
+                          <option value="FEMININ" class="form-control" >FEMININ</option>
+                          <option value="MASCULIN" class="form-control" selected>MASCULIN</option>
+                        </select>
+                </div>
+                <div class="col-md-4">
+                  L'enfant a-t-il déjà suivi des cours d'arabe ?
+                    <select id="suiviCourEleve1" name="suiviCourEleve1" class="form-control" onclick="activeElemnt('suiviCourEleve1', 'suiviCourIciEleve1')" select="activeElemnt('suiviCourEleve1', 'suiviCourIciEleve1')">
+                      <option value="" class="form-control" selected>--</option>
+                      <option value="OUI" class="form-control" >OUI</option>
+                      <option value="NON" class="form-control" >NON</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                  Au sein de notre école durant 2020/2021 ?
+                  <select id="suiviCourIciEleve1" name="suiviCourIciEleve1" class="form-control">
+                    <option value="" class="form-control" selected>--</option>
+                    <option value="OUI" class="form-control" >OUI</option>
+                    <option value="NON" class="form-control" >NON</option>
+                  </select>
+                </div>
+                <div class="col-md-4">
+                    N° de Classe  <input type="text" name="numClasseEleve1" class="form-control" placeholder="N° de Classe ...">
+                </div>
+
+                <div class="col-md-12">
+                  <button class="btn btn-default submit">Envoyer</button>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
 
 
 
 
 
+         <!-- TEAM -->
+         <section id="team" class="light">
+          <header class="title">
+            <h2>Creative <span>Team</span></h2>
+            <p>Lorem ipsum Dolor et reprehenderit laborum deserunt aliquip incididunt tempor id non. Lorem ipsum Fugiat anim labore cupidatat consequat non in sit dolore anim anim consequat nisi.</p>
+          </header>
 
+          <div class="container">
+            <div class="row">
+
+              <!-- 1 -->
+              <div class="col-md-3 col-sm-6 text-center">
+                <div class="wrap animated" data-animate="fadeInDown">
+                  <div class="img-team">
+                    <img src="images/team-1.jpg" alt="" class="img-circle">
+                  </div>
+
+                  <h3><input type="text" name="nomEnfant1" class="form-control" placeholder="Nom"></h3>
+                  <h5>Creative Director</h5>
+
+                  <p>Lorem ipsum Proident incididunt sint dolor cupidatat pariatur dolore magna pariatur in ea aliqua.</p>
+
+                  <div class="team-social">
+                    <ul class="list-inline social-list">
+                      <li><a href="#" class="fa fa-twitter"></a></li>
+                      <li><a href="#" class="fa fa-linkedin"></a></li>
+                      <li><a href="#" class="fa fa-facebook"></a></li>
+                      <li><a href="#" class="fa fa-google-plus"></a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <!-- 2 -->
+              <div class="col-md-3 col-sm-6 text-center">
+                <div class="wrap animated" data-animate="fadeInDown">
+                  <div class="img-team">
+                    <img src="images/team-2.jpg" alt="" class="img-circle">
+                  </div>
+
+                  <h3>Ellie Morgan</h3>
+                  <h5>Designer</h5>
+
+                  <p>Lorem ipsum Proident incididunt sint dolor cupidatat pariatur dolore magna pariatur in ea aliqua.</p>
+
+                  <div class="team-social">
+                    <ul class="list-inline social-list">
+                      <li><a href="#" class="fa fa-twitter"></a></li>
+                      <li><a href="#" class="fa fa-linkedin"></a></li>
+                      <li><a href="#" class="fa fa-facebook"></a></li>
+                      <li><a href="#" class="fa fa-google-plus"></a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <!-- 3 -->
+              <div class="col-md-3 col-sm-6 text-center">
+                <div class="wrap animated" data-animate="fadeInDown">
+                  <div class="img-team">
+                    <img src="images/team-3.jpg" alt="" class="img-circle">
+                  </div>
+
+                  <h3>Elche</h3>
+                  <h5>Developer</h5>
+
+                  <p>Lorem ipsum Proident incididunt sint dolor cupidatat pariatur dolore magna pariatur in ea aliqua.</p>
+
+                  <div class="team-social">
+                    <ul class="list-inline social-list">
+                      <li><a href="#" class="fa fa-twitter"></a></li>
+                      <li><a href="#" class="fa fa-linkedin"></a></li>
+                      <li><a href="#" class="fa fa-facebook"></a></li>
+                      <li><a href="#" class="fa fa-google-plus"></a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <!-- 4 -->
+              <div class="col-md-3 col-sm-6 text-center">
+                <div class="wrap animated" data-animate="fadeInDown">
+                  <div class="img-team">
+                    <img src="images/team-4.jpg" alt="" class="img-circle">
+                  </div>
+
+                  <h3>JF Thiago</h3>
+                  <h5>Commerce</h5>
+
+                  <p>Lorem ipsum Proident incididunt sint dolor cupidatat pariatur dolore magna pariatur in ea aliqua.</p>
+
+                  <div class="team-social">
+                    <ul class="list-inline social-list">
+                      <li><a href="#" class="fa fa-twitter"></a></li>
+                      <li><a href="#" class="fa fa-linkedin"></a></li>
+                      <li><a href="#" class="fa fa-facebook"></a></li>
+                      <li><a href="#" class="fa fa-google-plus"></a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div> <!-- /.container -->
+        </section>
+         <!-- INFO -->
+         <section id="info" class="dark">
+          <header class="title">
+            <h2>Our <span>Experties</span></h2>
+            <p>Lorem ipsum Nulla in incididunt esse tempor dolore ad voluptate aliquip magna sed in.</p>
+          </header>
+
+          <div class="container experties">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="skill">
+                  <ul class="skill-bar list-unstyled">
+                    <li><span class="percentage" data-value="50%"></span><em>Branding</em></li>
+                    <li><span class="percentage" data-value="95%"></span><em>Development</em></li>
+                    <li><span class="percentage" data-value="22%"></span><em>Social</em></li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="skill">
+                  <ul class="skill-bar list-unstyled">
+                    <li><span class="percentage" data-value="63%"></span><em>Graphic Design</em></li>
+                    <li><span class="percentage" data-value="90%"></span><em>Consulting</em></li>
+                    <li><span class="percentage" data-value="43%"></span><em>Logo</em></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div> <!-- /.container -->
+        </section>
+        <!-- TODO : DEBUT - A vérifier ce que représente cette partie -->
+        <section class="separator blue">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-3 col-sm-6 col-xs-6">
+                <div class="counter animated" data-animate="fadeInUp" data-delay="0">
+                  <div class="counter-icon">
+                    <i class="fa fa-group"></i>
+                  </div>
+                  <div class="counter-content">
+                    <span class="value" data-from="0" data-to="43"></span>
+                    <small>Clients</small>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-3 col-sm-6 col-xs-6">
+                <div class="counter animated" data-animate="fadeInUp" data-delay="500">
+                  <div class="counter-icon">
+                    <i class="fa fa-leaf"></i>
+                  </div>
+                  <div class="counter-content">
+                    <span class="value" data-from="0" data-to="20"></span>
+                    <small>Awards</small>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-3 col-sm-6 col-xs-6">
+                <div class="counter animated" data-animate="fadeInUp" data-delay="1000">
+                  <div class="counter-icon">
+                    <i class="fa fa-gears"></i>
+                  </div>
+                  <div class="counter-content">
+                    <span class="value" data-from="0" data-to="34"></span>
+                    <small>Projects</small>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-3 col-sm-6 col-xs-6">
+                <div class="counter animated" data-animate="fadeInUp" data-delay="1500">
+                  <div class="counter-icon">
+                    <i class="fa fa-inbox"></i>
+                  </div>
+                  <div class="counter-content">
+                    <span class="value" data-from="0" data-to="1298"></span>
+                    <small>Mail</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- TODO : FIN - A vérifier ce que représente cette partie -->
 
         <!-- FORMULAIRE - CONTACTER NOUS -->
          <section id="contact" class="dark">
