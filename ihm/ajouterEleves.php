@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 
 <?php
+require_once(__DIR__ . "/../service/conf/Config.php");
+require_once(__DIR__ . "/../utils/fonctions.php");
+include("../service/datasource/connectToBdd.php");
 session_start();
 ?>
 
@@ -69,8 +72,18 @@ session_start();
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="#header">Home</a></li>
                         <li><a href="#introduction">Introduction</a></li>
-                        <li><a href="#eleves">Eleves</a></li>
+                        <li><a href="#eleves">Ajouter Eleves</a></li>
                         <li><a href="#contact">Contact</a></li>
+                        <?php
+                        if(isset($_SESSION['idInscription'])){
+                        ?>
+                            <form method="post" id="deconnexion" name="deconnexion" action="../service/deconnexionAction.php" onsubmit="return checkInputForm()">
+                                <INPUT TYPE='hidden' name='returnPage' value="ihm/ajouterEleves.php">
+                                <li><button class="btn btn-default center-block submit">Déconnexion</button></li>
+                            </form>
+                        <?php
+                        }
+                        ?>
                     </ul>
                 </div> <!-- /.navbar-collapse -->
             </div> <!-- /.container -->
@@ -212,18 +225,13 @@ session_start();
     </script>
 
 
-    <?php
-    if( isset($_SESSION['idInscription']) ){
-        //unset($_SESSION['idInscriptionS']);
-    ?>
-
-    <form id="inscription" name="inscription" action="../domaine/ajouterElevesAction.php" onsubmit="return checkInputForm()">
-
-        <INPUT TYPE='hidden' name='returnPage' value="ihm/ajouterEleves.php">
-        <INPUT TYPE='hidden' name='returnErrorPage' value="ihm/ajouterEleves.php">
+    <form method="post" id="inscription" name="inscription" action="../service/ajouterEleveAction.php" onsubmit="return checkInputForm()">
+        <INPUT TYPE='hidden' name='returnPage' value="ihm/ajouterEleves.php#eleves">
+        <INPUT TYPE='hidden' name='returnErrorPage' value="ihm/ajouterEleves.php#eleves">
+        <?php if(isset($_SESSION['idInscription']) ){?>
         <INPUT TYPE='hidden' name='idInscription' value="<?php  echo($_SESSION['idInscription'])?>">
         <INPUT TYPE='hidden' name='idFoncInscription' value="<?php  echo($_SESSION['idFoncInscription'])?>">
-
+        <?php }?>
         <!-- ELEVES -->
         <section id="eleves" class="dark">
             <header class="title">
@@ -235,16 +243,26 @@ session_start();
                     <div class="col-md-12 animated" data-animate="fadeInLeft">
                         <div class="row">
                             <div class="col-md-12">
-                                Votre identifiant d'inscription (Merci de le garder, il vous permettera de modifier votre inscription)
-                                <input type="text" name="identifiantInscription" class="alert identifiantinscription " value="<?php  echo($_SESSION['idFoncInscription'])?>" disabled>
-                                <br/><br/>
+                                <?php  if(isset($_SESSION['idFoncInscription']) ) { ?>
+                                Votre identifiant d'inscription <a data-toggle="popover" title="Merci de le garder, il vous permettera de modifier votre inscription en ajoutant d'autres enfant par exemple"> (+) </a>
+                                <?php  } else { ?>
+                                Renseignez votre identifiant d'inscription <a data-toggle="popover" title="Merci de vous inscrir si vous ne possédez pas d'un numéro d'inscription"> (+) </a>
+                                <?php  } ?>
+                                <input type="text" id="idFoncInscription" name="idFoncInscription" class="alert identifiantinscription "
+                                       value="<?php
+                                       if(isset($_SESSION['idFoncInscription']) ) {
+                                           echo($_SESSION['idFoncInscription'] . '" disabled>');
+                                       } else {
+                                           echo('" required>');
+                                       } ?>
+                                <br/>
                             </div>
 
                             <div class="col-md-4">
-                                Nom de l'élève <input type="text" name="nomEleve" class="form-control" placeholder="Nom de l'élève ..." required>
+                                Nom de l'élève <input type="text" name="nomEleve" class="form-control" placeholder="Nom de l'élève ... " required>
                             </div>
                             <div class="col-md-4">
-                                Prémon de l'élève <input type="text" name="prenomEleve" class="form-control" placeholder="Prémon de l'élève ..." required>
+                                Prémon de l'élève <input type="text" name="prenomEleve" class="form-control" placeholder="Prénom de l'élève ... " required>
                             </div>
                             <div class="col-md-4">
                                 Sexe <select id="sexeEleve" name="sexeEleve" class="form-control" required>
@@ -252,6 +270,12 @@ session_start();
                                     <option value="F" class="backgroundBlackColor" >FEMININ</option>
                                     <option value="M" class="backgroundBlackColor" >MASCULIN</option>
                                 </select>
+                            </div>
+                            <div class="col-md-6">
+                                Date de naissance<input type="date" id="dateNaissEleve" name="dateNaissEleve" class="form-control" placeholder="Date de naissance ... " required>
+                            </div>
+                            <div class="col-md-6">
+                                Lieu de naissance <input type="text" id="lieuNaissEleve" name="lieuNaissEleve" class="form-control" placeholder="Lieu de naissance ... " required>
                             </div>
                             <div class="col-md-4">
                                 L'enfant a-t-il déjà suivi des cours d'arabe ?
@@ -272,7 +296,7 @@ session_start();
                                 </select>
                             </div>
                             <div class="col-md-4">
-                                N° de Classe  <input type="text" id="numClasseEleve" name="numClasseEleve" class="form-control" placeholder="N° de Classe ..." disabled>
+                                N° de Classe  <input type="text" id="numClasseEleve" name="numClasseEleve" class="form-control" placeholder="N° de Classe ... " disabled>
                             </div>
 
                             <div class="col-md-6">
@@ -283,8 +307,11 @@ session_start();
                                     <option value="0" class="backgroundBlackColor" >Je n’autorise pas mon fils, ma fille à renter seul(e) à la maison</option>
                                 </select>
                             </div>
-                            <div class="col-md-6">
-                                AUTORISATION DE PHOTOGRAPHIE
+                            <div class="col-md-6" >
+                                Autorisation de photographie <a data-toggle="popover"
+                                                                title="L’association A.C.E.B :
+- A photographier et à utiliser l’image (photo de classe ou autre) de notre enfant, conformément aux dispositions relatives au droit à l’image et au droit au nom.
+- A fixer, reproduire et communiquer au public les photographies prises dans le cadre des activités de l’association. Les photographies pourront être exploitées et utilisées directement, sous toute forme et tous supports connus et inconnus à ce jour, dans le monde entier, sans aucune limitation de temps et d’espace et ce sans préjudice au règlement intérieur de l’association.">(+)</a>
                                 <select id="photographieEleve" name="photographieEleve" class="form-control" required>
                                     <option value="" class="backgroundBlackColor" selected>--</option>
                                     <option value="1" class="backgroundBlackColor" >J’autorise</option>
@@ -295,22 +322,41 @@ session_start();
 
                             <div class="col-md-12">
                                 <br/>
-                                <button class="btn btn-default submit">Ajouter Eleve</button>
+                                <button class="btn btn-default center-block submit">Ajouter Eleve</button>
                                 <br/><br/>
                             </div>
 
                             <div class="col-md-12">
                                 Liste d'enfants inscrit
                             </div>
-                            <div class="col-md-3">
-                                <input type="text" name="identifiantInscription" class="alert enfantM" value="<?php  echo($_SESSION['idFoncInscription'])?>" disabled>
-                            </div>
-                            <div class="col-md-3">
-                                <input type="text" name="identifiantInscription" class="alert enfantM" value="<?php  echo($_SESSION['idFoncInscription'])?>" disabled>
-                            </div>
-                            <div class="col-md-3">
-                                <input type="text" name="identifiantInscription" class="alert enfantF" value="<?php  echo($_SESSION['idFoncInscription'])?>" disabled>
-                            </div>
+                            <?php
+                                $idInsciption_ = $_SESSION['idInscription'];
+                                $findEleveSql = "SELECT * from eleve where id_inscription='$idInsciption_'";
+                                $mysqli = new mysqli(USE_SERVER_BDD, USE_LOGIN_BDD, USE_PASS_BDD, USE_NAME_BDD);
+
+                                $result = $mysqli->query($findEleveSql, MYSQLI_STORE_RESULT_COPY_DATA) ;
+                                if($result) {
+                                    $i = 0;
+                                    while ($data = mysqli_fetch_array($result)) {
+                                        $i++;
+                                        $sexe = $data['sexe'];
+                                        $prenom = $data['prenom'];
+                                        $sexe = $data['sexe'];
+
+                                        echo('<div class="col-md-3">');
+                                        echo('<input type="text" name="enfant'.$i.'" class="alert enfant' . $sexe . '" value="' . $prenom . ' " disabled>');
+                                        echo('</div>');
+                                    }
+                                    if ($i == 0) {
+                                        echo('<div class="col-md-3">');
+                                        echo(' Aucun Eleve ajouté pour le moment ');
+                                        echo('</div>');
+                                    }
+                                } else {
+                                    echo ('Erreur affichage eleves : ' . $mysqli->error);
+                                }
+                            ?>
+
 
 
                         </div>
@@ -323,12 +369,6 @@ session_start();
 
     </form>
 
-    <?php
-    } else {
-
-            echo("ERREUR : IMPOSSIBLE D'AJOUTER DES ANFANTS !!");
-    }
-    ?>
 
 
 

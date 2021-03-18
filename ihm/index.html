@@ -242,7 +242,7 @@
 
       </script>
 
-      <form method="post" id="inscription" name="inscription" action="../service/createInscriptionAndParents.php" onsubmit="return checkInputForm()">
+      <form method="post" id="inscription" name="inscription" action="../service/ajouterInscriptionParentsAction.php" onsubmit="return checkInputForm()">
         <INPUT TYPE='hidden' name='returnPage' value="ihm/ajouterEleves.php">
         <INPUT TYPE='hidden' name='returnErrorPage' value="ihm/index.php">
 
@@ -328,24 +328,11 @@
                   <div class="col-md-6">
                     Ville <input type="text" name="ville" class="form-control" rows="1" placeholder="Ville" required>
                   </div>
-      <!--            <div class="col-md-12">
-                    <br/>
-                    Nombre d'enfants que vous souhaiez inscrir
-                    <select id="nbrEnfants" name="nbrEnfants" class="form-control">
-                      <option class="form-control" selected>--</option>
-                      <option value="1" class="form-control" >1</option>
-                      <option value="2" class="form-control" >2</option>
-                      <option value="3" class="form-control" >3</option>
-                      <option value="4" class="form-control" >4</option>
-                      <option value="5" class="form-control" >5</option>
-                      <option value="6" class="form-control" >6</option>
-                    </select>
-                  </div>
-       -->
+
                 </div>
                 <div class="col-md-12">
                   </br>
-                  <button class="btn btn-default submit">Envoyer</button>
+                  <button class="btn btn-default center-block submit">Envoyer</button>
                 </div>
             </div>
 

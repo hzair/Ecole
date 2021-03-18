@@ -88,15 +88,17 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     if ($nomMere == null) $paramObligatoire = $paramObligatoire ." nomMere";
     if ($prenomMere == null) $paramObligatoire = $paramObligatoire ." prenomMere";
     //if ($professionMere == null) $paramObligatoire = $paramObligatoire ." professionMere";
-    if ($telephonePortableMere == null) $paramObligatoire = $paramObligatoire ." telephonePortableMere";
+    //if ($telephonePortableMere == null) $paramObligatoire = $paramObligatoire ." telephonePortableMere";
     if ($email == null) $paramObligatoire = $paramObligatoire ." email";
     if ($adresse == null) $paramObligatoire = $paramObligatoire ." adressePostale";
     if ($codePostale == null) $paramObligatoire = $paramObligatoire ." codePostale";
     if ($ville == null) $paramObligatoire = $paramObligatoire ." ville";
-    if ($telephoneFixe == null) $paramObligatoire = $paramObligatoire ." telephoneFixe";
+    //if ($telephoneFixe == null) $paramObligatoire = $paramObligatoire ." telephoneFixe";
     if ($paramObligatoire != null){
         print(json_encode("les paramettres suivants sont obligatoires : " . $paramObligatoire));
-        return;
+        $_SESSION['messageError'] = "les paramettres suivants sont obligatoires : " . $paramObligatoire;
+        header('Location: /'. USE_BASE_URL . $err_page);
+        exit;
     }
 
 
@@ -124,6 +126,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
         $result2 = $mysqli->query($sql2) ;
         if ($result2) {
+            unset($_SESSION['messageError']);
             $_SESSION['idInscription'] = $idInscription;
             $_SESSION['idFoncInscription'] = $idFoncInscr;
             // Redirection de la page
@@ -142,6 +145,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
     /* Fermeture de la connexion */
     $mysqli->close();
+} else {
+    print(json_encode("ERREUR : post action "));
+    exit;
 }
 
 function generateAndVerifyIfExistIdFoncInBdd($mysqli){
