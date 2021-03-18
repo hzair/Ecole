@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<!--
-	Daraz by TEMPLATE STOCK
-	templatestock.co @templatestock
-	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
--->
+
+<?php
+session_start();
+?>
 
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
@@ -70,9 +69,7 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="#header">Home</a></li>
                         <li><a href="#introduction">Introduction</a></li>
-                        <li><a href="#parents">Parents</a></li>
                         <li><a href="#eleves">Eleves</a></li>
-                        <li><a href="#info">Info</a></li>
                         <li><a href="#contact">Contact</a></li>
                     </ul>
                 </div> <!-- /.navbar-collapse -->
@@ -191,122 +188,43 @@
     <script type="application/javascript">
         function checkInputForm()
         {
+            /*
             // 1 - verifier que nbrEnfants est un nombre
             var nbr = document.forms["inscription"]["nbrEnfants"].value;
             if (isNaN(nbr)) {
                 alert("!! Vous devez renseigner un nombre d'enfants !!");
                 return false;
             }
+            */
         }
 
-        function activeElemnt(name1, name2) {
-            $(document).ready(function(){
-                $(select[name=name1]).on('change',function(){
-                    if($(this).val()==1){
-                        $("input[name=name2]").prop("disabled",false);
-                    }else{
-                        $("input[name=name2]").prop("disabled",true);
-                    }
-                });
-            });
+        function activeElemnt(elm, id, isRequired) {
 
+            if(elm.value == "1"){
+                document.getElementById(id).disabled = false;
+                document.getElementById(id).required = isRequired;
+            } else {
+                document.getElementById(id).disabled = true;
+            }
 
-            //var elmt = document.getElementById(id).;
         }
 
     </script>
 
 
-        <!-- Creation Inscription avec information parent -->
-        <section id="parents" class="dark">
-            <header class="title">
-                <h2>RENSEIGNEMENTS - <span>PARENTS</span></h2>
-                <p>Les champs avec * sont obligatoires </p>
-            </header>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12 animated" data-animate="fadeInLeft">
-                        <div class="row">
-                            <div class="col-md-12">
-                                Votre identifiant d'inscription est le suivant
-                                <input type="text" name="identifiantInscription" class="form-control" placeholder="Identifiant" required disabled>
-                            </div>
-                            <div class="col-md-12">
-                                <h3>Père</h3>
-                            </div>
-                            <div class="col-md-3">
-                                Nom : <?php  print("nom")?>
-                            </div>
-                            <div class="col-md-3">
-                                Prénom :  <?php  print("nom")?>
-                            </div>
-                            <div class="col-md-3">
-                                Profession :  <?php  print("nom")?>
-                            </div>
-                            <div class="col-md-3">
-                                Tél. portable :  <?php  print("nom")?>
-                            </div>
-                            <div class="col-md-12">
-                                Vous êtes inscri au cours :  <?php  print("nom")?>
-                            </div>
+    <?php
+    if( isset($_SESSION['idInscription']) ){
+        //unset($_SESSION['idInscriptionS']);
+    ?>
 
-                            <div class="col-md-12">
-                                <h3>Mère</h3>
-                            </div>
-                            <div class="col-md-3">
-                                Nom :  <?php  print("nom")?>
-                            </div>
-                            <div class="col-md-3">
-                                Prénom :  <?php  print("nom")?>
-                            </div>
-                            <div class="col-md-3">
-                                Profession :  <?php  print("nom")?>
-                            </div>
-                            <div class="col-md-3">
-                                Tél. portable :  <?php  print("nom")?>
-                            </div>
-                            <div class="col-md-12">
-                                Vous êtes inscrite au cours :  <?php  print("nom")?>
-                            </div>
+    <form id="inscription" name="inscription" action="../domaine/ajouterElevesAction.php" onsubmit="return checkInputForm()">
 
-                            <div class="col-md-4">
-                                <br/>
-                                Parents séparés :  <?php  print("nom")?>
-                            </div>
-                            <div class="col-md-4">
-                                <br/>
-                                Adresse e-mail :  <?php  print("nom")?>
-                            </div>
-                            <div class="col-md-4">
-                                <br/>
-                                Téléphone fixe :  <?php  print("nom")?>
-                            </div>
-                            <div class="col-md-12">
-                                Adresse postale :  <?php  print("nom")?>
-                            </div>
-                            <div class="col-md-6">
-                                Code postale :  <?php  print("nom")?>
-                            </div>
-                            <div class="col-md-6">
-                                Ville :  <?php  print("nom")?>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            </br>
-                            <button class="btn btn-default submit">Envoyer</button>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-
-
-    <form id="inscription" name="inscription" action="../domaine/addEleve.php" onsubmit="return checkInputForm()">
+        <INPUT TYPE='hidden' name='returnPage' value="ihm/ajouterEleves.php">
+        <INPUT TYPE='hidden' name='returnErrorPage' value="ihm/ajouterEleves.php">
+        <INPUT TYPE='hidden' name='idInscription' value="<?php  echo($_SESSION['idInscription'])?>">
+        <INPUT TYPE='hidden' name='idFoncInscription' value="<?php  echo($_SESSION['idFoncInscription'])?>">
 
         <!-- ELEVES -->
-        <input type="hidden" name="identifiantInscription" value="<?php echo("TODO")?>>
         <section id="eleves" class="dark">
             <header class="title">
                 <h2>RENSEIGNEMENTS - <span>ENFANTS</span></h2>
@@ -316,21 +234,29 @@
                 <div class="row">
                     <div class="col-md-12 animated" data-animate="fadeInLeft">
                         <div class="row">
+                            <div class="col-md-12">
+                                Votre identifiant d'inscription (Merci de le garder, il vous permettera de modifier votre inscription)
+                                <input type="text" name="identifiantInscription" class="alert identifiantinscription " value="<?php  echo($_SESSION['idFoncInscription'])?>" disabled>
+                                <br/><br/>
+                            </div>
+
                             <div class="col-md-4">
-                                Nom de l'élève <input type="text" name="nomEleve" class="form-control" placeholder="Nom de l'élève ...">
+                                Nom de l'élève <input type="text" name="nomEleve" class="form-control" placeholder="Nom de l'élève ..." required>
                             </div>
                             <div class="col-md-4">
-                                Prémon de l'élève <input type="text" name="prenomEleve" class="form-control" placeholder="Prémon de l'élève ...">
+                                Prémon de l'élève <input type="text" name="prenomEleve" class="form-control" placeholder="Prémon de l'élève ..." required>
                             </div>
                             <div class="col-md-4">
-                                Sexe <select id="sexeEleve" name="sexeEleve" class="form-control">
+                                Sexe <select id="sexeEleve" name="sexeEleve" class="form-control" required>
+                                    <option value="" class="backgroundBlackColor" selected>--</option>
                                     <option value="F" class="backgroundBlackColor" >FEMININ</option>
-                                    <option value="M" class="backgroundBlackColor" selected>MASCULIN</option>
+                                    <option value="M" class="backgroundBlackColor" >MASCULIN</option>
                                 </select>
                             </div>
                             <div class="col-md-4">
                                 L'enfant a-t-il déjà suivi des cours d'arabe ?
-                                <select id="suiviCourEleve" name="suiviCourEleve" class="form-control" onclick="activeElemnt('suiviCourEleve1', 'suiviCourIciEleve1')" select="activeElemnt('suiviCourEleve1', 'suiviCourIciEleve1')">
+                                <select id="suiviCourEleve" name="suiviCourEleve" class="form-control"
+                                        onchange="activeElemnt(this, 'suiviCourIciEleve', true)" required>
                                     <option value="" class="backgroundBlackColor" selected>--</option>
                                     <option value="1" class="backgroundBlackColor" >OUI</option>
                                     <option value="0" class="backgroundBlackColor" >NON</option>
@@ -338,19 +264,20 @@
                             </div>
                             <div class="col-md-4">
                                 Au sein de notre école durant 2020/2021 ?
-                                <select id="suiviCourIciEleve" name="suiviCourIciEleve" class="form-control">
+                                <select id="suiviCourIciEleve" name="suiviCourIciEleve" class="form-control" disabled
+                                        onchange="activeElemnt(this, 'numClasseEleve', true)">
                                     <option value="" class="backgroundBlackColor" selected>--</option>
                                     <option value="1" class="backgroundBlackColor" >OUI</option>
                                     <option value="0" class="backgroundBlackColor" >NON</option>
                                 </select>
                             </div>
                             <div class="col-md-4">
-                                N° de Classe  <input type="text" name="numClasseEleve" class="form-control" placeholder="N° de Classe ...">
+                                N° de Classe  <input type="text" id="numClasseEleve" name="numClasseEleve" class="form-control" placeholder="N° de Classe ..." disabled>
                             </div>
 
                             <div class="col-md-6">
                                 DECHARGE
-                                <select id="dechargeEleve" name="dechargeEleve" class="form-control">
+                                <select id="dechargeEleve" name="dechargeEleve" class="form-control" required>
                                     <option value="" class="backgroundBlackColor" selected>--</option>
                                     <option value="1" class="backgroundBlackColor" >J’autorise mon fils, ma fille à renter seul(e) à la maison</option>
                                     <option value="0" class="backgroundBlackColor" >Je n’autorise pas mon fils, ma fille à renter seul(e) à la maison</option>
@@ -358,7 +285,7 @@
                             </div>
                             <div class="col-md-6">
                                 AUTORISATION DE PHOTOGRAPHIE
-                                <select id="photographieEleve" name="photographieEleve" class="form-control">
+                                <select id="photographieEleve" name="photographieEleve" class="form-control" required>
                                     <option value="" class="backgroundBlackColor" selected>--</option>
                                     <option value="1" class="backgroundBlackColor" >J’autorise</option>
                                     <option value="0" class="backgroundBlackColor" >Je n’autorise pas</option>
@@ -369,7 +296,22 @@
                             <div class="col-md-12">
                                 <br/>
                                 <button class="btn btn-default submit">Ajouter Eleve</button>
+                                <br/><br/>
                             </div>
+
+                            <div class="col-md-12">
+                                Liste d'enfants inscrit
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" name="identifiantInscription" class="alert enfantM" value="<?php  echo($_SESSION['idFoncInscription'])?>" disabled>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" name="identifiantInscription" class="alert enfantM" value="<?php  echo($_SESSION['idFoncInscription'])?>" disabled>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" name="identifiantInscription" class="alert enfantF" value="<?php  echo($_SESSION['idFoncInscription'])?>" disabled>
+                            </div>
+
 
                         </div>
                     </div>
@@ -381,6 +323,12 @@
 
     </form>
 
+    <?php
+    } else {
+
+            echo("ERREUR : IMPOSSIBLE D'AJOUTER DES ANFANTS !!");
+    }
+    ?>
 
 
 

@@ -242,8 +242,9 @@
 
       </script>
 
-      <form id="inscription" name="inscription" action="../domaine/inscription.php" onsubmit="return checkInputForm()">
-
+      <form method="post" id="inscription" name="inscription" action="../service/createInscriptionAndParents.php" onsubmit="return checkInputForm()">
+        <INPUT TYPE='hidden' name='returnPage' value="ihm/ajouterEleves.php">
+        <INPUT TYPE='hidden' name='returnErrorPage' value="ihm/index.php">
 
         <!-- Creation Inscription avec information parent -->
         <section id="parents" class="dark">
@@ -295,7 +296,7 @@
                     Tél. portable <input type="text" name="portableMere" class="form-control" placeholder="Tél. portable du mère">
                   </div>
                   <div class="col-md-12">
-                    Voulez-vous inscrir au cours <select id="coursAdultMere" name="coursAdultPere" class="form-control">
+                    Voulez-vous inscrir au cours <select id="coursAdultMere" name="coursAdultMere" class="form-control">
                                                     <option value="NON" class="backgroundBlackColor" selected>NON</option>
                                                     <option value="coursArabeAdulte" class="backgroundBlackColor" >Arabe adulte</option>
                                                     <option value="coursSciencesIslamiques" class="backgroundBlackColor" >Sciences islamiques</option>
@@ -306,8 +307,8 @@
                   <div class="col-md-4">
                     <br/>
                     Parents séparés <select id="parentsSepare" name="parentsSepare" class="form-control">
-                                      <option value="valeur1" class="backgroundBlackColor">OUI</option>
-                                      <option value="valeur2" class="backgroundBlackColor" selected>NON</option>
+                                      <option value="1" class="backgroundBlackColor">OUI</option>
+                                      <option value="0" class="backgroundBlackColor" selected>NON</option>
                                     </select>
                   </div>
                   <div class="col-md-4">

@@ -13,6 +13,27 @@
 
 .backgroundBlackColor{
     background-color: #1d1d1d;
+
+}
+
+.identifiantinscription{
+    background-color: #2c2c2d;
+    color: chartreuse;
+    text-align: center;
+    font-size: 20px;
+}
+
+.enfantM{
+    background-color: #3e4848;
+    color: #71d60d;
+    text-align: center;
+    font-size: 10px;
+}
+.enfantF{
+    background-color: #3e4848;
+    color: #b920d4;
+    text-align: center;
+    font-size: 10px;
 }
 
 html {
