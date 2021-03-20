@@ -54,6 +54,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     if($dataInBdd["id"] == null) {
         print(json_encode("Erreur de creation eleve : l'inscription avec le numero " . $idFoncInscription . "n'existe pas"));
         $_SESSION['messageError'] = "Erreur de creation eleve : l'inscription avec le numero " . $idFoncInscription . "n'existe pas";
+        $_SESSION['idFoncInscriptionInconnu'] = "l'identifiant ". $idFoncInscription . " est inconnu";
         header('Location: /'. USE_BASE_URL . $err_page);
         exit;
     } else {

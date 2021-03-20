@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<!--
-	Daraz by TEMPLATE STOCK
-	templatestock.co @templatestock
-	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
--->
+
+<?php
+require_once(__DIR__ . "/../service/conf/Config.php");
+require_once(__DIR__ . "/../utils/fonctions.php");
+include("../service/datasource/connectToBdd.php");
+session_start();
+?>
 
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 	<head>
@@ -70,10 +72,9 @@
                 <ul class="nav navbar-nav navbar-right">
                   <li><a href="#header">Home</a></li>
                   <li><a href="#introduction">Introduction</a></li>
-                  <li><a href="#parents">Parents</a></li>
-                  <li><a href="#eleves">Eleves</a></li>
-                  <li><a href="#info">Info</a></li>
-                  <li><a href="#contact">Contact</a></li>
+                  <li><a href="#parents">Inscription</a></li>
+                  <li><a href="ajouterEleves.php#eleves">Ajouter Eleves</a></li>
+                  <!--<li><a href="#contact">Contact</a></li>-->
                 </ul>
               </div> <!-- /.navbar-collapse -->
             </div> <!-- /.container -->
@@ -146,7 +147,7 @@
                                   title : "Institut Espoire"
                                 }
                             ],
-                loaderSVG = new SVGLoader(document.getElementById('loader'), {speedIn : 500, speedOut : 500, easingIn : mina.easeinout});
+                loaderSVG = new SVGLoader(document.getElementById('loader'), {speedIn : 800, speedOut : 800, easingIn : mina.easeinout});
                 loaderSVG.show()
             </script>
 
@@ -243,14 +244,14 @@
       </script>
 
       <form method="post" id="inscription" name="inscription" action="../service/ajouterInscriptionParentsAction.php" onsubmit="return checkInputForm()">
-        <INPUT TYPE='hidden' name='returnPage' value="ihm/ajouterEleves.php">
-        <INPUT TYPE='hidden' name='returnErrorPage' value="ihm/index.php">
+        <INPUT TYPE='hidden' name='returnPage' value="ihm/ajouterEleves.php#eleves">
+        <INPUT TYPE='hidden' name='returnErrorPage' value="ihm/index.php#parents">
 
         <!-- Creation Inscription avec information parent -->
         <section id="parents" class="dark">
         <header class="title">
           <h2>RENSEIGNEMENTS - <span>PARENTS</span></h2>
-          <p>Les champs avec * sont obligatoires </p>
+          <!--<p>Les champs avec * sont obligatoires </p>-->
         </header>
         <div class="container">
           <div class="row">
@@ -272,32 +273,34 @@
                     Tél. portable <input type="text" name="portablePere" class="form-control" placeholder="Tél. portable du père" required>
                   </div>
                   <div class="col-md-12">
-                    Voulez-vous inscrir au cours <select id="coursAdultPere" name="coursAdultPere" class="form-control">
-                                                  <option value="NON" class="backgroundBlackColor" selected>NON</option>
-                                                  <option value="coursArabeAdulte" class="backgroundBlackColor" >Arabe adulte</option>
-                                                  <option value="coursSciencesIslamiques" class="backgroundBlackColor" >Sciences islamiques</option>
-                                                  <option value="coursLesDeux" class="backgroundBlackColor" >Arabe adulte & sciences islamiques</option>
-                                                </select>
+                    Voulez-vous inscrir au cours <select id="coursAdultPere" name="coursAdultPere" class="form-control" required>
+                          <option value="" class="backgroundBlackColor" selected>--</option>
+                          <option value="NON" class="backgroundBlackColor">NON</option>
+                          <option value="coursArabeAdulte" class="backgroundBlackColor" >Arabe adulte</option>
+                          <option value="coursSciencesIslamiques" class="backgroundBlackColor" >Sciences islamiques</option>
+                          <option value="coursLesDeux" class="backgroundBlackColor" >Arabe adulte & sciences islamiques</option>
+                      </select>
                   </div>
 
                   <div class="col-md-12">
                     <h3>Mère</h3>
                   </div>
                   <div class="col-md-3">
-                    Nom <input type="text" name="nomMere" class="form-control" placeholder="Nom du mère">
+                    Nom <input type="text" name="nomMere" class="form-control" placeholder="Nom du mère" required>
                   </div>
                   <div class="col-md-3">
-                    Prénom <input type="text" name="prenomMere" class="form-control" placeholder="prénom du mère">
+                    Prénom <input type="text" name="prenomMere" class="form-control" placeholder="prénom du mère" required>
                   </div>
                   <div class="col-md-3">
                     Profession <input type="text" name="professionMere" class="form-control" placeholder="Profession du mère">
                   </div>
                   <div class="col-md-3">
-                    Tél. portable <input type="text" name="portableMere" class="form-control" placeholder="Tél. portable du mère">
+                    Tél. portable <input type="text" name="portableMere" class="form-control" placeholder="Tél. portable du mère" required>
                   </div>
                   <div class="col-md-12">
-                    Voulez-vous inscrir au cours <select id="coursAdultMere" name="coursAdultMere" class="form-control">
-                                                    <option value="NON" class="backgroundBlackColor" selected>NON</option>
+                    Voulez-vous inscrir au cours <select id="coursAdultMere" name="coursAdultMere" class="form-control" required>
+                                                    <option value="" class="backgroundBlackColor" selected>--</option>
+                                                    <option value="NON" class="backgroundBlackColor">NON</option>
                                                     <option value="coursArabeAdulte" class="backgroundBlackColor" >Arabe adulte</option>
                                                     <option value="coursSciencesIslamiques" class="backgroundBlackColor" >Sciences islamiques</option>
                                                     <option value="coursLesDeux" class="backgroundBlackColor" >Arabe adulte & sciences islamiques</option>
@@ -306,9 +309,10 @@
 
                   <div class="col-md-4">
                     <br/>
-                    Parents séparés <select id="parentsSepare" name="parentsSepare" class="form-control">
+                    Parents séparés <select id="parentsSepare" name="parentsSepare" class="form-control" required>
+                                      <option value="" class="backgroundBlackColor" selected>--</option>
+                                      <option value="0" class="backgroundBlackColor">NON</option>
                                       <option value="1" class="backgroundBlackColor">OUI</option>
-                                      <option value="0" class="backgroundBlackColor" selected>NON</option>
                                     </select>
                   </div>
                   <div class="col-md-4">
@@ -319,13 +323,13 @@
                     <br/>
                     Téléphone fixe <input type="tel" name="telephoneFixe" class="form-control" placeholder="Téléphone fixe">
                   </div>
-                  <div class="col-md-12">
+                  <div class="col-md-6">
                     Adresse postale <input type="text" name="adressePostale" class="form-control" placeholder="Adresse postale" required>
                   </div>
-                  <div class="col-md-6">
+                  <div class="col-md-3">
                     Code postale <input type="text" name="codePostale" class="form-control" placeholder="Code postale" required>
                   </div>
-                  <div class="col-md-6">
+                  <div class="col-md-3">
                     Ville <input type="text" name="ville" class="form-control" rows="1" placeholder="Ville" required>
                   </div>
 
@@ -356,7 +360,7 @@
 
 
 
-        <!-- FORMULAIRE - CONTACTER NOUS -->
+        <!-- FORMULAIRE - CONTACTER NOUS
          <section id="contact" class="dark">
           <header class="title">
             <h2>Nous contacter <span>Fr</span></h2>
@@ -395,6 +399,8 @@
             </div>
           </div>
         </section>
+
+        -->
 
         <section id="footer">
           <div class="container">

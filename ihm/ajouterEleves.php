@@ -72,8 +72,9 @@ session_start();
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="#header">Home</a></li>
                         <li><a href="#introduction">Introduction</a></li>
+                        <li><a href="index.php#parents">Inscription</a></li>
                         <li><a href="#eleves">Ajouter Eleves</a></li>
-                        <li><a href="#contact">Contact</a></li>
+                        <!--<li><a href="#contact">Contact</a></li>-->
                         <?php
                         if(isset($_SESSION['idInscription'])){
                         ?>
@@ -186,7 +187,7 @@ session_start();
                             <div class="about-detail">
                                 <h4>Année scolaire</h4>
                                 <p>
-                                    Ce <a href="#parents">formulaire</a> est uniquement pour les nouveaux élèves qui vont s’inscrire pour l’année <strong>2020-2021</strong>
+                                    Ce <a href="#eleves">formulaire</a> est uniquement pour les nouveaux élèves qui vont s’inscrire pour l’année <strong>2020-2021</strong>
                                     <br>
                                     Merci de le remplir, et de cliquer sur le bouton <strong>"Envoyer"</strong>
                                 </p>
@@ -236,7 +237,7 @@ session_start();
         <section id="eleves" class="dark">
             <header class="title">
                 <h2>RENSEIGNEMENTS - <span>ENFANTS</span></h2>
-                <p>Les champs avec * sont obligatoires </p>
+                <!--<p>Les champs avec * sont obligatoires </p>-->
             </header>
             <div class="container">
                 <div class="row">
@@ -255,6 +256,9 @@ session_start();
                                        } else {
                                            echo('" required>');
                                        } ?>
+                                <?php  if(isset($_SESSION['idFoncInscriptionInconnu']) ) {
+                                    echo($_SESSION['idFoncInscriptionInconnu']);
+                                } ?>
                                 <br/>
                             </div>
 
@@ -325,35 +329,38 @@ session_start();
                                 <button class="btn btn-default center-block submit">Ajouter Eleve</button>
                                 <br/><br/>
                             </div>
-
+                            <?php if(isset($_SESSION['idInscription'])) {?>
                             <div class="col-md-12">
-                                Liste d'enfants inscrit
+                                Liste d'enfants inscrits :
+                                <br/>
                             </div>
                             <?php
-                                $idInsciption_ = $_SESSION['idInscription'];
-                                $findEleveSql = "SELECT * from eleve where id_inscription='$idInsciption_'";
-                                $mysqli = new mysqli(USE_SERVER_BDD, USE_LOGIN_BDD, USE_PASS_BDD, USE_NAME_BDD);
+                                    $idInsciption_ = $_SESSION['idInscription'];
+                                    $findEleveSql = "SELECT * from eleve where id_inscription='$idInsciption_'";
+                                    $mysqli = new mysqli(USE_SERVER_BDD, USE_LOGIN_BDD, USE_PASS_BDD, USE_NAME_BDD);
 
-                                $result = $mysqli->query($findEleveSql, MYSQLI_STORE_RESULT_COPY_DATA) ;
-                                if($result) {
-                                    $i = 0;
-                                    while ($data = mysqli_fetch_array($result)) {
-                                        $i++;
-                                        $sexe = $data['sexe'];
-                                        $prenom = $data['prenom'];
-                                        $sexe = $data['sexe'];
+                                    $result = $mysqli->query($findEleveSql, MYSQLI_STORE_RESULT_COPY_DATA) ;
+                                    if($result) {
+                                        $i = 0;
+                                        while ($data = mysqli_fetch_array($result)) {
+                                            $i++;
+                                            $sexe = $data['sexe'];
+                                            $prenom = $data['prenom'];
+                                            $nom = $data['nom'];;
+                                            $sexe = $data['sexe'];
 
-                                        echo('<div class="col-md-3">');
-                                        echo('<input type="text" name="enfant'.$i.'" class="alert enfant' . $sexe . '" value="' . $prenom . ' " disabled>');
-                                        echo('</div>');
+                                            echo('<div class="col-md-3">');
+                                            echo('<input type="text" name="enfant'.$i.'" class="alert enfant' . $sexe . '" value="' . $prenom . ' '. $nom.' " disabled>');
+                                            echo('</div>');
+                                        }
+                                        if ($i == 0) {
+                                            echo('<div class="col-md-4">');
+                                            echo(' Aucun Eleve ajouté pour le moment ');
+                                            echo('</div>');
+                                        }
+                                    } else {
+                                        echo ('Erreur affichage eleves : ' . $mysqli->error);
                                     }
-                                    if ($i == 0) {
-                                        echo('<div class="col-md-3">');
-                                        echo(' Aucun Eleve ajouté pour le moment ');
-                                        echo('</div>');
-                                    }
-                                } else {
-                                    echo ('Erreur affichage eleves : ' . $mysqli->error);
                                 }
                             ?>
 
@@ -372,12 +379,7 @@ session_start();
 
 
 
-
-
-
-
-
-        <!-- FORMULAIRE - CONTACTER NOUS -->
+        <!-- FORMULAIRE - CONTACTER NOUS
         <section id="contact" class="dark">
             <header class="title">
                 <h2>Nous contacter <span>Fr</span></h2>
@@ -416,7 +418,7 @@ session_start();
                 </div>
             </div>
         </section>
-
+        -->
         <section id="footer">
             <div class="container">
                 <div class="row">
