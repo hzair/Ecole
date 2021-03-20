@@ -108,7 +108,7 @@
                         <?php if($nbrEleve == 0) { ?>
                             <th rowspan="<?php echo(getNbrEleves($idInscription, $mysqli));?>">
                                 <img src="../ihm/images/icone-modif.png" title="Modifier" alt="Modification" onclick="modiferInscription(<?php echo('\''.$idFoncInscription.'\',\''.$idInscription.'\'');?>);">
-                                <img src="../ihm/images/icone-modif.png" title="Fiche Engagenet" alt="Fiche Engagement et peiement" onclick="ficheEngagementPaiementInscription(<?php echo('\''.$idFoncInscription.'\',\''.$idInscription.'\'');?>);">
+                                <img src="../ihm/images/fiche_engagement.png" title="Fiche Engagenet" alt="Fiche Engagement et peiement" onclick="ficheEngagementPaiementInscription(<?php echo('\''.$idFoncInscription.'\',\''.$idInscription.'\'');?>);">
                             </th>
                             <th rowspan="<?php echo(getNbrEleves($idInscription, $mysqli));?>">
                                 <?php echo($idFoncInscription);?> </th>
@@ -129,7 +129,7 @@
                      <tr>
                          <th rowspan="<?php echo(getNbrEleves($idInscription, $mysqli));?>">
                              <img src="../ihm/images/icone-modif.png" title="Modifier" alt="Modification" onclick="modiferInscription(<?php echo('\''.$idFoncInscription.'\',\''.$idInscription.'\'');?>);">
-                             <img src="../ihm/images/icone-modif.png" title="Fiche Engagenet" alt="Fiche Engagement" onclick="ficheEngagementPaiementInscription(<?php echo('\''.$idFoncInscription.'\',\''.$idInscription.'\'');?>);">
+                             <img src="../ihm/images/fiche_engagement.png" title="Fiche Engagenet" alt="Fiche Engagement" onclick="ficheEngagementPaiementInscription(<?php echo('\''.$idFoncInscription.'\',\''.$idInscription.'\'');?>);">
                          </th>
                         <th rowspan="<?php echo(getNbrEleves($idInscription, $mysqli));?>">
                             <?php echo($idFoncInscription);?> </th>
