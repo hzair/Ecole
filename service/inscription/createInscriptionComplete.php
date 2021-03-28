@@ -11,9 +11,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $email = $inscription->email;
     $telephoneFixe = $inscription->{"telephoneFixe"};
     $parents_separe = $inscription->{"parents_separe"};
-    $adresse = $inscription->{"adresse "};
+    $adresse = $inscription->{"adresse"};
     $codePostale = $inscription->{"codePostale"};
     $ville = $inscription->{"ville"};
+
+    echo ("email:".$email." tele:".$telephoneFixe." parentSepar:".$parents_separe.' adress:'.$adresse.' codePost:'.$codePostale.' ville:'.$ville);
 
     // Information du pere
     $pere = $inscription->{"pere"};
@@ -29,7 +31,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
     // information des enfant
     $enfants = $inscription->{"enfants"};
-    $nbrEnfant = count($enfants);
+    $nbrEnfant = 0;
+    if($enfants != null){
+        $nbrEnfant = count($enfants);
+    }
     foreach($enfants as $i => $enfant){
 
         print(" \n i : " . $i);

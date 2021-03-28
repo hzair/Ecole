@@ -73,7 +73,7 @@ session_start();
                         <li><a href="#header">Home</a></li>
                         <li><a href="#introduction">Introduction</a></li>
                         <li><a href="index.php#parents">Inscription</a></li>
-                        <li><a href="#eleves">Ajouter Eleves</a></li>
+                        <li><a href="#eleves">Partie Eleves</a></li>
                         <!--<li><a href="#contact">Contact</a></li>-->
                         <?php
                         if(isset($_SESSION['idInscription'])){

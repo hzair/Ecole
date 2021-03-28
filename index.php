@@ -8,6 +8,10 @@
 
 
 
+<?php
+    header('Location: ihm/');
+?>
+
 
 
 

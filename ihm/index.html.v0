@@ -584,6 +584,12 @@
           </div>
         </div>
       </div>
+
+      <p align="center">
+          <a href="javascript:window.print()">Imprimer</a>   &nbsp; &nbsp; &nbsp;
+          <!--<a href="javascript:self.close('Imprimer la commande');">Fermer</a>-->
+      </p>
+
     </section>
 
    </div><!-- /.container-fluid -->

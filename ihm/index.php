@@ -73,7 +73,7 @@ session_start();
                   <li><a href="#header">Home</a></li>
                   <li><a href="#introduction">Introduction</a></li>
                   <li><a href="#parents">Inscription</a></li>
-                  <li><a href="ajouterEleves.php#eleves">Ajouter Eleves</a></li>
+                  <li><a href="ajouterEleves.php#eleves">Partie Eleves</a></li>
                   <!--<li><a href="#contact">Contact</a></li>-->
                 </ul>
               </div> <!-- /.navbar-collapse -->
@@ -332,7 +332,10 @@ session_start();
                   <div class="col-md-3">
                     Ville <input type="text" name="ville" class="form-control" rows="1" placeholder="Ville" required>
                   </div>
-
+                  <div>
+                      <input type="checkbox" name="condition" rows="1" required>
+                        Je déclare avoir pris connaissance des conditions d'inscription.
+                    </div>
                 </div>
                 <div class="col-md-12">
                   </br>
