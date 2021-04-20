@@ -3,7 +3,7 @@
 abstract class Environnement {
     const local = "local";
     const integration = "int";
-    const production = "pro";
+    const production = "prod";
 }
 
 // TODO HZA : A modifier en fonction le deploiement en PROD
@@ -12,22 +12,22 @@ define("ENV", Environnement::local);
 $SERVER_BDD = [
     Environnement::local => "localhost:3306",
     Environnement::integration => "TODO...",
-    Environnement::production => "TODO..."
+    Environnement::production => "ecolearaik652.mysql.db"
 ];
 $USE_LOGIN_BDD = [
     Environnement::local => "ecole",
     Environnement::integration => "TODO...",
-    Environnement::production => "TODO..."
+    Environnement::production => "ecolearaik652"
 ];
 $PASS_BDD = [
     Environnement::local => "ecole",
     Environnement::integration => "TODO...",
-    Environnement::production => "TODO..."
+    Environnement::production => "7VssdD4PaMRM"
 ];
 $NAME_BDD = [
     Environnement::local => "ecole",
     Environnement::integration => "TODO...",
-    Environnement::production => "TODO..."
+    Environnement::production => "ecolearaik652"
 ];
 
 // TODO HZA : A modifier en fonction le deploiement en PROD

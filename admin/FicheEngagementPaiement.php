@@ -175,7 +175,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // Recuperation liste Enfants
-    $findEnfantsSql = "SELECT * FROM eleve where id_inscription = '$idInscription'";
+    $findEnfantsSql = "SELECT * FROM eleve where id_inscription = '$idInscription'  and type_cours='ENF'";
     $EleveRes = $mysqli->query($findEnfantsSql, MYSQLI_STORE_RESULT_COPY_DATA) ;
 
     if($EleveRes) {
@@ -206,50 +206,67 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <br/>
 
 <p align="left" class="backgroundTitre2Color"> COURS ARABE POUR ADULTE </p>
+<?php
+$findAdultSql = "SELECT * FROM eleve where id_inscription = '$idInscription' and type_cours='ARABE'";
+$EleveAdultRes = $mysqli->query($findAdultSql, MYSQLI_STORE_RESULT_COPY_DATA) ;
+
+if($EleveAdultRes) {
+$nbrEleve = 0;
+?>
 <table border="0" cellspacing=4 cellpadding=4> <tr>
         <?php
-        if($coursArabeAdultePere) {?>
+        while ($eleve = $EleveAdultRes->fetch_array()) {
+            $nomEleve = $eleve['nom'];
+            $prenomEleve = $eleve['prenom'];
+            $sexeEleve = $eleve['sexe'];
+            $dateNaissance = $eleve['date_naissance'];
+            ?>
             <td align="center" valign="middle">
                 <p align="center" style="border: solid" >
-                    <?php echo(" ".$nomPere." ".$prenomPere); ?>
+                    <?php echo(' '.$nomEleve.' '.$prenomEleve); ?> <br/>
+                    Né<?php if ($sexeEleve == "F") echo("e"); ?>  le <?php echo(' '.$dateNaissance); ?>
                 </p>
             </td>
             <td align="center" valign="middle"> &nbsp;</td>
             <?php
+            $nbrEleve++;
         }
-        if($coursArabeAdulteMere) {?>
-            <td align="center" valign="middle">
-                <p align="center" style="border: solid" >
-                    <?php echo(" ".$nomMere." ".$prenomMere); ?>
-                </p>
-            </td>
-        <?php  }?>
-        <td align="center" valign="middle"> &nbsp;</td>
+        ?>
     </tr></table>
-
+<?php    }
+?>
 
 <p align="left" class="backgroundTitre2Color"> COURS SCIENCES ISLAMIQUE </p>
-<table border="0" cellspacing=4 cellpadding=4> <tr>
+<?php
+$findAdultSql = "SELECT * FROM eleve where id_inscription = '$idInscription' and type_cours='SCIENCES_ISLAMIQUES'";
+$EleveAdultRes = $mysqli->query($findAdultSql, MYSQLI_STORE_RESULT_COPY_DATA) ;
 
-        <?php
-            if($coursScienceIslamiquePere) {?>
-        <td align="center" valign="middle">
-            <p align="center" style="border: solid" >
-                <?php echo(" ".$nomPere." ".$prenomPere); ?>
-            </p>
-        </td>
-        <td align="center" valign="middle"> &nbsp;</td>
-        <?php
+if($EleveAdultRes) {
+    $nbrEleve = 0;
+    ?>
+    <table border="0" cellspacing=4 cellpadding=4> <tr>
+            <?php
+            while ($eleve = $EleveAdultRes->fetch_array()) {
+                $nomEleve = $eleve['nom'];
+                $prenomEleve = $eleve['prenom'];
+                $sexeEleve = $eleve['sexe'];
+                $dateNaissance = $eleve['date_naissance'];
+                ?>
+                <td align="center" valign="middle">
+                    <p align="center" style="border: solid" >
+                        <?php echo(' '.$nomEleve.' '.$prenomEleve); ?> <br/>
+                        Né<?php if ($sexeEleve == "F") echo("e"); ?>  le <?php echo(' '.$dateNaissance); ?>
+                    </p>
+                </td>
+                <td align="center" valign="middle"> &nbsp;</td>
+                <?php
+                $nbrEleve++;
             }
-            if($coursScienceIslamiqueMere) {?>
-        <td align="center" valign="middle">
-            <p align="center" style="border: solid" >
-                <?php echo(" ".$nomMere." ".$prenomMere); ?>
-            </p>
-        </td>
-        <?php  }?>
-        <td align="center" valign="middle"> &nbsp;</td>
-</tr></table>
+            ?>
+        </tr></table>
+<?php    }
+?>
+
 
     <br/>
 

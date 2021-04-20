@@ -38,11 +38,32 @@
     background-size: revert;
 }
 
+.backgroundRecap{
+    background-color: #343c41;
+    color: beige;
+    border: #0b1e8d;
+}
+.backgroundRecap{
+    background-color: #343c41;
+    color: beige;
+    border: #0b1e8d;
+}
+
+.messageErrorColore{
+    text-decoration-color: red;
+}
 .identifiantinscription{
     background-color: #2c2c2d;
     color: chartreuse;
     text-align: center;
     font-size: 20px;
+}
+
+.identifiantinscription0{
+    background-color: #2c2c2d;
+    color: chartreuse;
+    text-align: center;
+    font-size: 10px;
 }
 
 .enfantM{
@@ -257,7 +278,7 @@ a {
     background-color: rgba(255,255,255,0.95);
     border: none;
     margin: 0;
-    padding: 20px 0 !important;
+    padding: 7px 0 !important;
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
     -webkit-transition : .2s;
     -moz-transition : .2s;

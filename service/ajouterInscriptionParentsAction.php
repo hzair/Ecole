@@ -2,7 +2,7 @@
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     require_once(__DIR__ . "/conf/Config.php");
     require_once(__DIR__ . "/../utils/fonctions.php");
-    include("/datasource/connectToBdd.php");
+    include("datasource/connectToBdd.php");
 
     session_start();
 
@@ -10,6 +10,24 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
     $success_page = $_POST['returnPage'];
     $err_page = $_POST['returnErrorPage'];
+
+    /*
+    // Vérification de la disponibilite du Email
+    $emailMajuscul = $_POST['email'];
+    $sqlDispoMail = "SELECT upper(email) FROM inscription where upper(email)=upper('$emailMajuscul')";
+    $resultDispoMail = $mysqli->query($sqlDispoMail, MYSQLI_STORE_RESULT_COPY_DATA) ;
+    while($dataDispoMail = mysqli_fetch_array($resultDispoMail)){
+        if($dataDispoMail['upper(email)'] == $emailMajuscul) {
+            $_SESSION['messageError'] = "Email déjà utilisé pour un autre compte. Merci de choisir un autre Email ou se connecter sur votre ancien compte";
+            header('Location: /'. USE_BASE_URL . $err_page);
+            exit;
+        } else {
+            $_SESSION['messageError'] = "2 Email déjà utilisé pour un autre compte. Merci de choisir un autre Email ou se connecter sur votre ancien compte";
+            header('Location: /'. USE_BASE_URL . $err_page);
+            exit;
+        }
+    }
+    */
 
     // Generer ID fonctionnel d'inscription
     $idFoncInscr = generateAndVerifyIfExistIdFoncInBdd($mysqli);
@@ -36,20 +54,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $sexePere = 'M';
     $telephonePortablePere = $_POST['portablePere'];
     $professionPere = $_POST['professionPere'];
-    $coursAdultPere = $_POST['coursAdultPere'];
-    if($coursAdultPere == 'coursLesDeux'){
-        $coursArabeAdultePere = 1;
-        $coursSciencesIslamiquesPere = 1;
-    } else if($coursAdultPere == 'coursArabeAdulte') {
-        $coursArabeAdultePere = 1;
-        $coursSciencesIslamiquesPere = 0;
-    } else if($coursAdultPere == 'coursSciencesIslamiques') {
-        $coursArabeAdultePere = 0;
-        $coursSciencesIslamiquesPere = 1;
-    } else {
-        $coursArabeAdultePere = 0;
-        $coursSciencesIslamiquesPere = 0;
-    }
+
+    $coursArabeAdultePere = 0;
+    $coursSciencesIslamiquesPere = 0;
+
 
     // Mere :
     $nomMere = $_POST['nomMere'];
@@ -57,20 +65,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $sexeMere = 'F';
     $telephonePortableMere = $_POST['portableMere'];
     $professionMere = $_POST['professionMere'];
-    $coursAdultMere = $_POST['coursAdultMere'];
-    if($coursAdultMere == 'coursLesDeux'){
-        $coursArabeAdulteMere = 1;
-        $coursSciencesIslamiquesMere = 1;
-    } else if($coursAdultMere == 'coursArabeAdulte') {
-        $coursArabeAdulteMere = 1;
-        $coursSciencesIslamiquesMere = 0;
-    } else if($coursAdultMere == 'coursSciencesIslamiques') {
-        $coursArabeAdulteMere = 0;
-        $coursSciencesIslamiquesMere = 1;
-    } else {
-        $coursArabeAdulteMere = 0;
-        $coursSciencesIslamiquesMere = 0;
-    }
+    $coursArabeAdulteMere = 0;
+    $coursSciencesIslamiquesMere = 0;
 
     $parentsSepare = $_POST['parentsSepare'];
     $email = $_POST['email'];
@@ -101,7 +97,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         exit;
     }
 
-
     // Creation du PERE en BDD
     $sql = "INSERT INTO `parent` (`nom`, `prenom`, `email`, `profession`, `sexe`,
                                   `id_inscription`, `adresse`, `code_postale`, 
@@ -126,6 +121,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
         $result2 = $mysqli->query($sql2) ;
         if ($result2) {
+
+            // Envoyer Email
+            envoiEmail($email, creationCompteMessage($nomPere, $idFoncInscr));
+
             unset($_SESSION['messageError']);
             $_SESSION['idInscription'] = $idInscription;
             $_SESSION['idFoncInscription'] = $idFoncInscr;
@@ -162,4 +161,21 @@ function generateAndVerifyIfExistIdFoncInBdd($mysqli){
     } else {
         return $idFoncInscr;
     }
+}
+
+function envoiEmail($destination, $message) {
+    $from = "nepasrepondre@institutespoir.fr";
+    $subject = "Inscription : Création Compte Institut Espoire";
+    $headers = "De :" . $from;
+    mail($destination,$subject,$message, $headers);
+}
+
+function creationCompteMessage($nom, $idFoncInsc){
+    return "Bonjour Mr, Mme ".$nom. "\n"
+                ."Votre compte est bien créé. Vous pouvez utilisé votre identifiant ci-dessous pour les inscriptions \n \n"
+                ."Identifiant d'inscription : " .$idFoncInsc
+                ."\n \n \n"
+                ."Cordialement"
+                ."\n"
+                ."Institut Espoire";
 }

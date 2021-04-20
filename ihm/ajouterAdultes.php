@@ -12,7 +12,7 @@ session_start();
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Inscriptions - Inscrire Enfant</title>
+    <title>Inscriptions - Inscrire Adulte</title>
 
     <link rel="stylesheet" href="css/bootstrap.min.css"/>
     <link rel="stylesheet" href="css/font-awesome.min.css"/>
@@ -155,17 +155,17 @@ session_start();
     </script>
 
 
-    <form method="post" id="inscription" name="inscription" action="../service/ajouterEleveAction.php" onsubmit="return checkInputForm()">
+    <form method="post" id="inscriptionAdulte" name="inscriptionAdulte" action="../service/ajouterAdulteAction.php" onsubmit="return checkInputForm()">
         <INPUT TYPE='hidden' name='returnPage' value="ihm/inscrire.php#inscrire">
-        <INPUT TYPE='hidden' name='returnErrorPage' value="ihm/ajouterEleves.php#eleves">
+        <INPUT TYPE='hidden' name='returnErrorPage' value="ihm/ajouterAdultes.php#adulte">
         <?php if(isset($_SESSION['idInscription']) ){?>
         <INPUT TYPE='hidden' name='idInscription' value="<?php  echo($_SESSION['idInscription'])?>">
         <INPUT TYPE='hidden' name='idFoncInscription' value="<?php  echo($_SESSION['idFoncInscription'])?>">
         <?php }?>
-        <!-- ELEVES -->
-        <section id="eleves" class="dark">
+        <!-- Adulte -->
+        <section id="adulte" class="dark">
             <header class="title">
-                <h2>RENSEIGNEMENTS - <span>ENFANTS</span></h2>
+                <h2>RENSEIGNEMENTS - <span>ADULTE</span></h2>
                 <!--<p>Les champs avec * sont obligatoires </p>-->
             </header>
             <div class="container">
@@ -191,84 +191,57 @@ session_start();
                                 <br/>
                             </div>
 
-                            <div class="col-md-4">
-                                Nom de l'élève <input type="text" name="nomEleve" class="form-control" placeholder="Nom de l'élève ... " required>
+                            <div class="col-md-12">
+                                <br/>
                             </div>
                             <div class="col-md-4">
-                                Prémon de l'élève <input type="text" name="prenomEleve" class="form-control" placeholder="Prénom de l'élève ... " required>
+                                Nom de l'élève <input type="text" name="nomAdulte" class="form-control" placeholder="Nom ... " required>
                             </div>
                             <div class="col-md-4">
-                                Sexe <select id="sexeEleve" name="sexeEleve" class="form-control" required>
+                                Prémon de l'élève <input type="text" name="prenomAdulte" class="form-control" placeholder="Prénom ... " required>
+                            </div>
+                            <div class="col-md-4">
+                                Sexe <select id="sexeAdulte" name="sexeAdulte" class="form-control" required>
                                     <option value="" class="backgroundBlackColor" selected>--</option>
                                     <option value="F" class="backgroundBlackColor" >FEMININ</option>
                                     <option value="M" class="backgroundBlackColor" >MASCULIN</option>
                                 </select>
                             </div>
-                            <div class="col-md-6">
-                                Date de naissance<input type="date" id="dateNaissEleve" name="dateNaissEleve" class="form-control" placeholder="Date de naissance ... " required>
-                            </div>
-                            <div class="col-md-6">
-                                Lieu de naissance <input type="text" id="lieuNaissEleve" name="lieuNaissEleve" class="form-control" placeholder="Lieu de naissance ... " required>
+                            <div class="col-md-4">
+                                Date de naissance<input type="date" id="dateNaissAdulte" name="dateNaissAdulte" class="form-control" placeholder="Date de naissance ... " required>
                             </div>
                             <div class="col-md-4">
-                                L'enfant a-t-il déjà suivi des cours d'arabe ?
-                                <select id="suiviCourEleve" name="suiviCourEleve" class="form-control"
-                                        onchange="activeElemnt(this, 'suiviCourIciEleve', true)" required>
+                                Lieu de naissance <input type="text" id="lieuNaissAdulte" name="lieuNaissAdulte" class="form-control" placeholder="Lieu de naissance ... " required>
+                            </div>
+                            <div class="col-md-4">
+                                Inscrir au cours de<select id="coursAdult" name="coursAdult" class="form-control" required>
                                     <option value="" class="backgroundBlackColor" selected>--</option>
-                                    <option value="1" class="backgroundBlackColor" >OUI</option>
-                                    <option value="0" class="backgroundBlackColor" >NON</option>
+                                    <option value="ARABE" class="backgroundBlackColor" >Arabe adulte</option>
+                                    <option value="SCIENCES_ISLAMIQUES" class="backgroundBlackColor" >Sciences islamiques</option>
                                 </select>
-                            </div>
-                            <div class="col-md-4">
-                                Au sein de notre école durant 2020/2021 ?
-                                <select id="suiviCourIciEleve" name="suiviCourIciEleve" class="form-control" disabled
-                                        onchange="activeElemnt(this, 'numClasseEleve', true)">
-                                    <option value="" class="backgroundBlackColor" selected>--</option>
-                                    <option value="1" class="backgroundBlackColor" >OUI</option>
-                                    <option value="0" class="backgroundBlackColor" >NON</option>
-                                </select>
-                            </div>
-                            <div class="col-md-4">
-                                N° de Classe  <input type="text" id="numClasseEleve" name="numClasseEleve" class="form-control" placeholder="N° de Classe ... " disabled>
                             </div>
 
                             <div class="col-md-6">
-                                DECHARGE
-                                <select id="dechargeEleve" name="dechargeEleve" class="form-control" required>
-                                    <option value="" class="backgroundBlackColor" selected>--</option>
-                                    <option value="1" class="backgroundBlackColor" >J’autorise mon fils, ma fille à renter seul(e) à la maison</option>
-                                    <option value="0" class="backgroundBlackColor" >Je n’autorise pas mon fils, ma fille à renter seul(e) à la maison</option>
-                                </select>
-                            </div>
-                            <div class="col-md-6" >
-                                Autorisation de photographie <a data-toggle="popover"
-                                                                title="L’association A.C.E.B :
-- A photographier et à utiliser l’image (photo de classe ou autre) de notre enfant, conformément aux dispositions relatives au droit à l’image et au droit au nom.
-- A fixer, reproduire et communiquer au public les photographies prises dans le cadre des activités de l’association. Les photographies pourront être exploitées et utilisées directement, sous toute forme et tous supports connus et inconnus à ce jour, dans le monde entier, sans aucune limitation de temps et d’espace et ce sans préjudice au règlement intérieur de l’association.">(+)</a>
-                                <select id="photographieEleve" name="photographieEleve" class="form-control" required>
-                                    <option value="" class="backgroundBlackColor" selected>--</option>
-                                    <option value="1" class="backgroundBlackColor" >J’autorise</option>
-                                    <option value="0" class="backgroundBlackColor" >Je n’autorise pas</option>
-                                </select>
-                            </div>
-
-
-                            <div class="col-md-12">
                                 <br/>
-                                <button class="btn btn-default center-block submit">Ajouter Eleve</button>
+                                <button class="btn btn-default center-block submit">Ajouter Adulte</button>
+                                <br/><br/>
+                            </div>
+                            <div class="col-md-6">
+                                <br/>
+                                <a href="inscrire.php#inscrire"> Retour >> </a>
                                 <br/><br/>
                             </div>
                             <?php if(isset($_SESSION['idInscription'])) {?>
                             <div class="col-md-12">
-                                Liste d'enfants inscrits :
+                                Liste d'adultes inscrits :
                                 <br/>
                             </div>
                             <?php
                                     $idInsciption_ = $_SESSION['idInscription'];
-                                    $findEleveSql = "SELECT * from eleve where id_inscription='$idInsciption_'  and type_cours='ENF'";
+                                    $findAdulteSql = "SELECT * from eleve where id_inscription='$idInsciption_' and (type_cours='SCIENCES_ISLAMIQUES' or type_cours='ARABE')";
                                     $mysqli = new mysqli(USE_SERVER_BDD, USE_LOGIN_BDD, USE_PASS_BDD, USE_NAME_BDD);
 
-                                    $result = $mysqli->query($findEleveSql, MYSQLI_STORE_RESULT_COPY_DATA) ;
+                                    $result = $mysqli->query($findAdulteSql, MYSQLI_STORE_RESULT_COPY_DATA) ;
                                     if($result) {
                                         $i = 0;
                                         while ($data = mysqli_fetch_array($result)) {
@@ -284,11 +257,11 @@ session_start();
                                         }
                                         if ($i == 0) {
                                             echo('<div class="col-md-4">');
-                                            echo(' Aucun Eleve ajouté pour le moment ');
+                                            echo(' Aucun Adulte ajouté pour le moment ');
                                             echo('</div>');
                                         }
                                     } else {
-                                        echo ('Erreur affichage eleves : ' . $mysqli->error);
+                                        echo ('Erreur affichage Adultes : ' . $mysqli->error);
                                     }
                                 }
                             ?>

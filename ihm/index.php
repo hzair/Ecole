@@ -25,8 +25,28 @@ session_start();
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZXJBVDf7R4JqmSpopVPoduIGWx1IwpBM"></script>
     <script type="text/javascript" src="js/plugins.js"></script>
 
+        <script type="application/javascript">
+            function checkInputForm()
+            {
+                return true;
+            }
 
-    </script>
+            function activeElemnt(name1, name2) {
+                $(document).ready(function(){
+                    $(select[name=name1]).on('change',function(){
+                        if($(this).val()==1){
+                            $("input[name=name2]").prop("disabled",false);
+                        }else{
+                            $("input[name=name2]").prop("disabled",true);
+                        }
+                    });
+                });
+
+
+                //var elmt = document.getElementById(id).;
+            }
+
+        </script>
 
       <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -59,22 +79,12 @@ session_start();
           <nav class="navbar navbar-fixed-top navbar-default bottom">
             <div class="container">
               <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu">
-                  <span class="sr-only">Toggle navigation</span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                </button>
                 <a class="navbar-brand" href="#header">Institut Espoire - Inscriptions</a>
               </div><!-- /.navbar-header -->
 
               <div class="collapse navbar-collapse" id="menu">
                 <ul class="nav navbar-nav navbar-right">
-                  <li><a href="#header">Home</a></li>
-                  <li><a href="#introduction">Introduction</a></li>
-                  <li><a href="#parents">Inscription</a></li>
-                  <li><a href="ajouterEleves.php#eleves">Partie Eleves</a></li>
-                  <!--<li><a href="#contact">Contact</a></li>-->
+                  <li><a href="#connexion">Connexion/Nouveau</a></li>
                 </ul>
               </div> <!-- /.navbar-collapse -->
             </div> <!-- /.container -->
@@ -106,34 +116,7 @@ session_start();
                 </div> <!-- /.overlay -->
               </div> <!-- /.image-slide -->
 
-              <nav class="nav-slide">
-                <a class="prev" href="#prev">
-                  <span class="icon-wrap">
-                    <svg class="icon" width="32" height="32" viewBox="0 0 64 64">
-                      <use xlink:href="#arrow-left">
-                    </svg>
-                  </span>
-                  <div>
-                    <span>Prev Photo</span>
-                    <h3>...</h3>
-                    <p>...</p>
-                    <img alt="Previous thumb">
-                  </div>
-                </a>
-                <a class="next" href="#next">
-                  <span class="icon-wrap">
-                    <svg class="icon" width="32" height="32" viewBox="0 0 64 64">
-                      <use xlink:href="#arrow-right">
-                    </svg>
-                  </span>
-                  <div>
-                    <span>Next Photo</span>
-                    <h3>...</h3>
-                    <p>...</p>
-                    <img alt="Next thumb">
-                  </div>
-                </a>
-              </nav>
+
             </section>
 
             <script type="text/javascript">
@@ -156,254 +139,48 @@ session_start();
         <!-- HEADER END -->
 
 
-        <!-- INTRODUCTION -->
-        <section id="introduction" class="light">
-            <header class="title">
-              <h2>Introduction - <span> Formulaire d'inscription </span></h2>
-            </header>
 
-            <div class="container">
-              <div class="row table-row">
-                <div class="col-sm-6 hidden-xs">
-                  <div class="section-content">
-                    <div class="big-image" style="background-image:url(images/1.png)"></div>
-                  </div>
-                </div>
-
-                <div class="col-sm-6">
-                  <div class="section-content">
-                    <div class="about-content left animated" data-animate="fadeInLeft">
-                      <div class="about-icon"><i class="fa fa-calendar"></i></div>
-                      <div class="about-detail">
-                        <h4>Année scolaire</h4>
-                        <p>
-                          Ce <a href="#parents">formulaire</a> est uniquement pour les nouveaux élèves qui vont s’inscrire pour l’année <strong>2020-2021</strong>
-                          <br>
-                          Merci de le remplir, et de cliquer sur le bouton <strong>"Envoyer"</strong>
-                        </p>
-                      </div>
-                    </div>
-
-                    <div class="about-content left animated" data-animate="fadeInLeft">
-                      <div class="about-icon"><i class="fa fa-desktop"></i></div>
-                      <div class="about-detail">
-                        <h4>Adresse</h4>
-                        <p>Institut Espoir : 362 route de Genas Bron 69500 </p>
-                          </div>
-                    </div>
-
-                    <div class="about-content left animated" data-animate="fadeInLeft">
-                      <div class="about-icon"><i class="fa fa-mail-reply-all"></i></div>
-                      <div class="about-detail">
-                        <h4>Email</h4>
-                        <p>Contactez-nous par eMail : <strong>inscriptions.institutespoir@gmail.com </strong></p>
-                        </p>
-                      </div>
-                    </div>
-
-                    <div class="about-content left animated" data-animate="fadeInLeft">
-                      <div class="about-icon"><i class="fa fa-mobile-phone"></i></div>
-                      <div class="about-detail">
-                        <h4>Téléphone</h4>
-                        <p>Contactez-nous au : <strong> (33) 6 87 93 16 89 </strong> </strong></p>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div> <!-- /.row table-row -->
-            </div> <!-- /.container -->
-      </section>
-
-      <script type="application/javascript">
-        function checkInputForm()
-        {
-          // 1 - verifier que nbrEnfants est un nombre
-          var nbr = document.forms["inscription"]["nbrEnfants"].value;
-          if (isNaN(nbr)) {
-            alert("!! Vous devez renseigner un nombre d'enfants !!");
-            return false;
-          }
-        }
-
-        function activeElemnt(name1, name2) {
-          $(document).ready(function(){
-            $(select[name=name1]).on('change',function(){
-              if($(this).val()==1){
-                $("input[name=name2]").prop("disabled",false);
-              }else{
-                $("input[name=name2]").prop("disabled",true);
-              }
-            });
-          });
-
-
-          //var elmt = document.getElementById(id).;
-        }
-
-      </script>
-
-      <form method="post" id="inscription" name="inscription" action="../service/ajouterInscriptionParentsAction.php" onsubmit="return checkInputForm()">
-        <INPUT TYPE='hidden' name='returnPage' value="ihm/ajouterEleves.php#eleves">
-        <INPUT TYPE='hidden' name='returnErrorPage' value="ihm/index.php#parents">
-
-        <!-- Creation Inscription avec information parent -->
-        <section id="parents" class="dark">
-        <header class="title">
-          <h2>RENSEIGNEMENTS - <span>PARENTS</span></h2>
-          <!--<p>Les champs avec * sont obligatoires </p>-->
-        </header>
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12 animated" data-animate="fadeInLeft">
-                <div class="row">
-                  <div class="col-md-12">
-                    <h3>Père</h3>
-                  </div>
-                  <div class="col-md-3">
-                    Nom <input type="text" name="nomPere" class="form-control" placeholder="Nom du père" required>
-                  </div>
-                  <div class="col-md-3">
-                    Prénom <input type="text" name="prenomPere" class="form-control" placeholder="prénom du père" required>
-                  </div>
-                  <div class="col-md-3">
-                    Profession <input type="text" name="professionPere" class="form-control" placeholder="Profession du père">
-                  </div>
-                  <div class="col-md-3">
-                    Tél. portable <input type="text" name="portablePere" class="form-control" placeholder="Tél. portable du père" required>
-                  </div>
-                  <div class="col-md-12">
-                    Voulez-vous inscrir au cours <select id="coursAdultPere" name="coursAdultPere" class="form-control" required>
-                          <option value="" class="backgroundBlackColor" selected>--</option>
-                          <option value="NON" class="backgroundBlackColor">NON</option>
-                          <option value="coursArabeAdulte" class="backgroundBlackColor" >Arabe adulte</option>
-                          <option value="coursSciencesIslamiques" class="backgroundBlackColor" >Sciences islamiques</option>
-                          <option value="coursLesDeux" class="backgroundBlackColor" >Arabe adulte & sciences islamiques</option>
-                      </select>
-                  </div>
-
-                  <div class="col-md-12">
-                    <h3>Mère</h3>
-                  </div>
-                  <div class="col-md-3">
-                    Nom <input type="text" name="nomMere" class="form-control" placeholder="Nom du mère" required>
-                  </div>
-                  <div class="col-md-3">
-                    Prénom <input type="text" name="prenomMere" class="form-control" placeholder="prénom du mère" required>
-                  </div>
-                  <div class="col-md-3">
-                    Profession <input type="text" name="professionMere" class="form-control" placeholder="Profession du mère">
-                  </div>
-                  <div class="col-md-3">
-                    Tél. portable <input type="text" name="portableMere" class="form-control" placeholder="Tél. portable du mère" required>
-                  </div>
-                  <div class="col-md-12">
-                    Voulez-vous inscrir au cours <select id="coursAdultMere" name="coursAdultMere" class="form-control" required>
-                                                    <option value="" class="backgroundBlackColor" selected>--</option>
-                                                    <option value="NON" class="backgroundBlackColor">NON</option>
-                                                    <option value="coursArabeAdulte" class="backgroundBlackColor" >Arabe adulte</option>
-                                                    <option value="coursSciencesIslamiques" class="backgroundBlackColor" >Sciences islamiques</option>
-                                                    <option value="coursLesDeux" class="backgroundBlackColor" >Arabe adulte & sciences islamiques</option>
-                                                  </select>
-                  </div>
-
-                  <div class="col-md-4">
-                    <br/>
-                    Parents séparés <select id="parentsSepare" name="parentsSepare" class="form-control" required>
-                                      <option value="" class="backgroundBlackColor" selected>--</option>
-                                      <option value="0" class="backgroundBlackColor">NON</option>
-                                      <option value="1" class="backgroundBlackColor">OUI</option>
-                                    </select>
-                  </div>
-                  <div class="col-md-4">
-                    <br/>
-                    Adresse e-mail <input type="text" name="email" class="form-control" placeholder="Adresse e-mail" required>
-                  </div>
-                  <div class="col-md-4">
-                    <br/>
-                    Téléphone fixe <input type="tel" name="telephoneFixe" class="form-control" placeholder="Téléphone fixe">
-                  </div>
-                  <div class="col-md-6">
-                    Adresse postale <input type="text" name="adressePostale" class="form-control" placeholder="Adresse postale" required>
-                  </div>
-                  <div class="col-md-3">
-                    Code postale <input type="text" name="codePostale" class="form-control" placeholder="Code postale" required>
-                  </div>
-                  <div class="col-md-3">
-                    Ville <input type="text" name="ville" class="form-control" rows="1" placeholder="Ville" required>
-                  </div>
-                  <div>
-                      <input type="checkbox" name="condition" rows="1" required>
-                        Je déclare avoir pris connaissance des conditions d'inscription.
-                    </div>
-                </div>
-                <div class="col-md-12">
-                  </br>
-                  <button class="btn btn-default center-block submit">Envoyer</button>
-                </div>
-            </div>
-
-           <!--
-           <div class="col-md-4 animated" data-animate="fadeInRight">
-              <div class="col-md-12">
-                <br/><br/><br/><br/><br/><br/><br/><br/>
-                <span> <a href="#eleves">Etape suivante >></a> </span>
-              </div>
-            </div>
-            -->
-
-          </div>
-        </div>
-      </section>
-
-
-
-
-
-
-
-
-        <!-- FORMULAIRE - CONTACTER NOUS
-         <section id="contact" class="dark">
+        <!-- FORMULAIRE - CONTACTER NOUS -->
+         <section id="connexion" class="dark">
           <header class="title">
-            <h2>Nous contacter <span>Fr</span></h2>
-            <p>Pour plus d'informations, vous pouvez nous envoyer vos questions/remarques via ce formulaire</p>
+            <h2>Se connecter <span>ou</span> créer un compte</h2>
+            <p>Si vous avez déjà créé votre compte, connectez-vous et modifiez votre inscription. Sinon créez un nouveau compte</p>
           </header>
           <div class="container">
             <div class="row">
-              <div class="col-md-8 animated" data-animate="fadeInLeft">
-                <form action="#">
-                  <div class="row">
-                    <div class="col-md-6">
-                      <input type="text" class="form-control" placeholder="Votre Nom">
-                    </div>
-                    <div class="col-md-6">
-                      <input type="email" class="form-control" placeholder="Votre Email">
-                    </div>
-                    <div class="col-md-12">
-                      <textarea class="form-control" rows="3" placeholder="Message..."></textarea>
-                    </div>
-                    <div class="col-md-12">
-                      <button class="btn btn-default submit">Envoi Message</button>
-                    </div>
+              <div class="col-md-8 animated" <?php if(!isset($_SESSION['messageError'])) {?>data-animate="fadeInLeft" <?php } ?>>
+                <form method="post" id="connexion" name="connexion" action="../service/connexionAction.php" onsubmit="return checkInputForm()">
+                    <INPUT TYPE='hidden' name='returnPage' value="ihm/inscrire.php#inscrire">
+                    <INPUT TYPE='hidden' name='returnErrorPage' value="ihm/index.php#connexion">
+                    <div class="row">
+                        <div class="col-md-12 animated messageErrorColore"
+                             data-animate="fadeInLeft" role="alert">
+                            <?php
+                            if(isset($_SESSION['messageError'])) {
+                                if ($_SESSION['messageError'] != null) {
+                                    echo ('<p class="text-danger">' . $_SESSION['messageError'] . '</p>');
+                                    unset($_SESSION['messageError']);
+                                }
+                            }
+                            ?>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" id="idFoncInscription" name="idFoncInscription" class="form-control" placeholder="Identifiant inscription ..." required>
+                        </div>
+                        <div class="col-md-3">
+                            <button class="btn alert-info btn-default submit">Se connecter</button>
+                        </div>
+                        <div class="col-md-12">
+                            <a href="creerCompte.php#compte"> Créer nouveau Compte </a>
+                        </div>
                   </div>
                 </form>
-              </div>
-
-              <div class="col-md-4 animated" data-animate="fadeInRight">
-                <address>
-                    <span><i class="fa fa-map-marker fa-lg"></i> 362 Route de Genas, 69500 Bron</span>
-                    <span><i class="fa fa-phone fa-lg"></i> (33) 6 87 93 16 89 </span>
-                    <span><i class="fa fa-envelope-o fa-lg"></i> <a href="mailto:inscriptions.institutespoir@gmail.com">contact&#64; inscriptions.institutespoir@gmail.com</a></span>
-                    <span><i class="fa fa-globe fa-lg"></i> <a href="http://support.example.com">support.example.com</a></span>
-                </address>
               </div>
 
             </div>
           </div>
         </section>
 
-        -->
 
         <section id="footer">
           <div class="container">

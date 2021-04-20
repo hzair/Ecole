@@ -1,4 +1,4 @@
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
 <?php
 
     require_once(__DIR__ . "/../service/conf/Config.php");
@@ -6,11 +6,12 @@
     include("../service/datasource/connectToBdd.php");
     session_start();
  ?>
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>LISTE INSCRIPTION </title>
+    <title>LISTE INSCRIPTIONS </title>
 
     <link rel="stylesheet" href="../ihm/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="../ihm/css/font-awesome.min.css"/>
@@ -49,6 +50,15 @@
 
 <script language="JavaScript" type="text/javascript">
 
+    function supprimerInscription(idFonc, id){
+        if(confirm("Voulez-vous supprimer définitivement cette inscription avec l'identifiant '" + idFonc + "' ?")) {
+            var formElmt = document.getElementById("supp_inscription_form");
+            formElmt.idFoncInscription.value = idFonc;
+            formElmt.idInscription.value = id;
+            formElmt.submit();
+        }
+    }
+
     function modiferInscription(idFonc, id){
         var formElmt = document.getElementById("modif_inscription_form");
         formElmt.idFoncInscription.value = idFonc;
@@ -65,24 +75,30 @@
 
 </script>
 
+<form action="deleteInscriptionAction.php" method="post" id="supp_inscription_form" >
+    <INPUT TYPE="hidden" id="idFoncInscription" name="idFoncInscription" value="">
+    <INPUT TYPE="hidden" id= "idInscription" name="idInscription" value="">
+    <INPUT TYPE='hidden' name='returnPage' value="admin/listeInscriptionsFiltre.php">
+    <INPUT TYPE='hidden' name='returnErrorPage' value="admin/listeInscriptionsFiltre.php">
+</form>
 <form action="majInscriptionAction.php" method="post" id="modif_inscription_form" >
     <INPUT TYPE="hidden" id="idFoncInscription" name="idFoncInscription" value="">
     <INPUT TYPE="hidden" id= "idInscription" name="idInscription" value="">
-    <INPUT TYPE='hidden' name='returnPage' value="admin/listeInscriptions.php">
-    <INPUT TYPE='hidden' name='returnErrorPage' value="admin/listeInscriptions.php">
+    <INPUT TYPE='hidden' name='returnPage' value="admin/listeInscriptionsFiltre.php">
+    <INPUT TYPE='hidden' name='returnErrorPage' value="admin/listeInscriptionsFiltre.php">
 </form>
 <form action="FicheEngagementPaiement.php" method="post" id="fiche_engagement_form" >
     <INPUT TYPE="hidden" id="idFoncInscription" name="idFoncInscription" value="">
     <INPUT TYPE="hidden" id= "idInscription" name="idInscription" value="">
-    <INPUT TYPE='hidden' name='returnPage' value="admin/listeInscriptions.php">
-    <INPUT TYPE='hidden' name='returnErrorPage' value="admin/listeInscriptions.php">
+    <INPUT TYPE='hidden' name='returnPage' value="admin/listeInscriptionsFiltre.php">
+    <INPUT TYPE='hidden' name='returnErrorPage' value="admin/listeInscriptionsFiltre.php">
 </form>
 
 <p align="center" class="backgroundTitreColor"> Liste des <span>Inscriptions</span></p>
-        <!--<p>Les champs avec * sont obligatoires </p>-->
 
 
-<table align="center" border="1" cellpadding="0" cellspacing="1"
+
+    <table align="center" border="1" cellpadding="0" cellspacing="1"
        id="table"
        data-toggle="table"
        data-search="true"
@@ -101,7 +117,7 @@
         <th data-filter-control="input" data-sortable="true">Nom Mère</th>
         <th data-filter-control="input" data-sortable="true">Téléphone Mère</th>
         <th data-filter-control="input" data-sortable="true">Email</th>
-        <th data-filter-control="input">Enfants</th>
+        <th data-filter-control="input">Les inscrits</th>
     </tr>
     </thead>
     <tbody>
@@ -141,20 +157,22 @@
 
 
             // Recuperation liste Enfants
-            $findEnfantsSql = "SELECT * FROM eleve where id_inscription = '$idInscription'";
+            $findEnfantsSql = "SELECT * FROM eleve where id_inscription = '$idInscription' order by type_cours";
             $EleveRes = $mysqli->query($findEnfantsSql, MYSQLI_STORE_RESULT_COPY_DATA) ;
 
             if($EleveRes) {
                 $nbrEleve = 0;
                 $prenomAllEleves = "";
                 while($eleve = $EleveRes->fetch_array()) {
-                    $prenomAllEleves = $prenomAllEleves . "<br/> " .$eleve['prenom'];
+                    $prenomAllEleves = $prenomAllEleves . "<br/> " .$eleve['prenom'] . " <b>(".getTypeCours($eleve['type_cours']).")</b>";
                     $nbrEleve++;
                 }
                     ?>
                     <tr>
                         <th>
-                            <img src="../ihm/images/fiche_engagement.png" title="Fiche Engagenet" alt="Fiche Engagement" onclick="ficheEngagementPaiementInscription(<?php echo('\''.$idFoncInscription.'\',\''.$idInscription.'\'');?>);">
+                            <img src="../ihm/images/fiche_engagement.png" title="Fiche Engagement" alt="Fiche Engagement" onclick="ficheEngagementPaiementInscription(<?php echo('\''.$idFoncInscription.'\',\''.$idInscription.'\'');?>);">
+                            <img src="../ihm/images/icone-delete.png" title="Suppression" alt="Suppression" onclick="supprimerInscription(<?php echo('\''.$idFoncInscription.'\',\''.$idInscription.'\'');?>);">
+
                         </th>
                         <th> <?php echo($idFoncInscription);?> </th>
                         <td> <?php echo($nomPere ." ". $prenomPere);?> </td>
@@ -184,6 +202,19 @@
             }
         }
         return 0;
+    }
+
+    function getTypeCours($key) {
+        if($key == 'ENF') {
+            return 'Enfant';
+        }
+        if($key == 'ARABE') {
+            return 'Arabe adulte';
+        }
+        if($key == 'SCIENCES_ISLAMIQUES') {
+            return 'Sciences islamiques';
+        }
+        return 'inconnu';
     }
 
 
