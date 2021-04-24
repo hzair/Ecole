@@ -1082,7 +1082,7 @@ span.quot-name:before {
   border-radius: 0;
   border-color: #555;
   color: #fff;
-  background-color: rgba(0, 0, 0, .1);
+  background-color: rgba(65, 7, 87, 0.18);
 }
 
 .form-control:focus {

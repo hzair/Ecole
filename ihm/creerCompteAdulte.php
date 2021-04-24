@@ -127,7 +127,7 @@ session_start();
 
               <div class="collapse navbar-collapse" id="menu">
                 <ul class="nav navbar-nav navbar-right">
-                  <li><a href="#compte">Créer un compte</a></li>
+                  <li><a href="#adulte">Créer un compte</a></li>
                 </ul>
               </div> <!-- /.navbar-collapse -->
             </div> <!-- /.container -->
@@ -169,7 +169,7 @@ session_start();
                                   title : "Inscription 2021-2022"
                                 },
                                 {
-                                  bigImage :"images/institut-espoire.png",
+                                  bigImage :"images/slide-2.jpg",
                                   title : "Institut Espoire"
                                 }
                             ],
@@ -184,14 +184,14 @@ session_start();
 
 
 
-      <form method="post" id="compte" name="inscription" action="../service/ajouterInscriptionParentsAction.php" onsubmit="return checkInputForm()">
-        <INPUT TYPE='hidden' name='returnPage' value="ihm/inscrire.php#inscrire">
-        <INPUT TYPE='hidden' name='returnErrorPage' value="ihm/creerCompte.php#parents">
+      <form method="post" id="compte" name="inscription" action="../service/ajouterInscriptionAdulteSeulAction.php" onsubmit="return checkInputForm()">
+        <INPUT TYPE='hidden' name='returnPage' value="ihm/inscrireAdulte.php#inscrire">
+        <INPUT TYPE='hidden' name='returnErrorPage' value="ihm/creerCompteAdulte.php#adulte">
 
         <!-- Creation Inscription avec information parent -->
-        <section id="parents" class="dark">
+        <section id="adulte" class="dark">
         <header class="title">
-          <h2>RENSEIGNEMENTS DES <span>PARENTS</span></h2>
+          <h2>RENSEIGNEMENTS DES <span>INFORMATIONS</span></h2>
           <!--<p>Les champs avec * sont obligatoires </p>-->
         </header>
         <div class="container">
@@ -207,69 +207,64 @@ session_start();
                                 unset($_SESSION['messageError']);
                             }
                         }
+                        if(isset($_SESSION['messageOK'])) {
+                            if ($_SESSION['messageOK'] != null) {
+                                echo ('<p class="text-success">' . $_SESSION['messageOK'] . '</p>');
+                                unset($_SESSION['messageOK']);
+                            }
+                        }
                         ?>
                     </div>
-                  <div class="col-md-12">
-                    <h3>Père</h3>
+                  <div class="col-md-4">
+                    Nom <input type="text" name="nom" class="form-control" placeholder="Nom" required>
                   </div>
-                  <div class="col-md-3">
-                    Nom <input type="text" name="nomPere" class="form-control" placeholder="Nom du père" required>
+                  <div class="col-md-4">
+                    Prénom <input type="text" name="prenom" class="form-control" placeholder="prénom" required>
                   </div>
-                  <div class="col-md-3">
-                    Prénom <input type="text" name="prenomPere" class="form-control" placeholder="prénom du père" required>
-                  </div>
-                  <div class="col-md-3">
-                    Profession <input type="text" name="professionPere" class="form-control" placeholder="Profession du père">
-                  </div>
-                  <div class="col-md-3">
-                    Tél. portable <input type="text" name="portablePere" class="form-control" placeholder="Tél. portable du père" required>
-                  </div>
-
-                  <div class="col-md-12">
-                    <h3>Mère</h3>
-                  </div>
-                  <div class="col-md-3">
-                    Nom <input type="text" name="nomMere" class="form-control" placeholder="Nom du mère" required>
-                  </div>
-                  <div class="col-md-3">
-                    Prénom <input type="text" name="prenomMere" class="form-control" placeholder="prénom du mère" required>
-                  </div>
-                  <div class="col-md-3">
-                    Profession <input type="text" name="professionMere" class="form-control" placeholder="Profession du mère">
-                  </div>
-                  <div class="col-md-3">
-                    Tél. portable <input type="text" name="portableMere" class="form-control" placeholder="Tél. portable du mère" required>
+                  <div class="col-md-4">
+                    Profession <input type="text" name="profession" class="form-control" placeholder="Profession">
                   </div>
 
                   <div class="col-md-4">
-                    <br/>
-                    Parents séparés <select id="parentsSepare" name="parentsSepare" class="form-control" required>
-                                      <option value="" class="backgroundBlackColor" selected>--</option>
-                                      <option value="0" class="backgroundBlackColor">NON</option>
-                                      <option value="1" class="backgroundBlackColor">OUI</option>
-                                    </select>
-                  </div>
-                  <div class="col-md-4">
-                    <br/>
+
                     Adresse e-mail <input type="email" id="email" name="email" class="form-control" placeholder="Adresse e-mail"
                                           onchange="verifierDisponibMail(this.value)" required>
                   </div>
-                  <div class="col-md-4">
-                    <br/>
+                  <div class="col-md-3">
+                        Tél. portable <input type="text" name="portable" class="form-control" placeholder="Tél. portable" required>
+                  </div>
+                  <div class="col-md-3">
                     Téléphone fixe <input type="tel" name="telephoneFixe" class="form-control" placeholder="Téléphone fixe">
                   </div>
+                    <div class="col-md-2">
+                        Sexe <select id="sexe" name="sexe" class="form-control" required>
+                            <option value="" class="backgroundBlackColor" selected>--</option>
+                            <option value="F" class="backgroundBlackColor" >FEMININ</option>
+                            <option value="M" class="backgroundBlackColor" >MASCULIN</option>
+                        </select>
+                    </div>
                   <div class="col-md-6">
                     Adresse postale <input type="" name="adressePostale" class="form-control" placeholder="Adresse postale" required>
                   </div>
-                  <div class="col-md-3">
+                  <div class="col-md-2">
                     Code postale <input type="text" name="codePostale" class="form-control" placeholder="Code postale" required>
                   </div>
-                  <div class="col-md-3">
+                  <div class="col-md-4">
                     Ville <input type="text" name="ville" class="form-control" rows="1" placeholder="Ville" required>
                   </div>
+
+                    <div class="col-md-12">
+                        Voulez-vous inscrire au cours <select id="coursAdult" name="coursAdult" class="form-control" required>
+                            <option value="" class="backgroundBlackColor" selected>--</option>
+                            <option value="coursArabeAdulte" class="backgroundBlackColor" >Arabe adulte</option>
+                            <option value="coursSciencesIslamiques" class="backgroundBlackColor" >Sciences islamiques</option>
+                            <option value="coursLesDeux" class="backgroundBlackColor" >Arabe adulte & sciences islamiques</option>
+                        </select>
+                    </div>
+
                   <div class="col-md-12">
                       <input type="checkbox" name="condition" rows="1" required>
-                      Je déclare avoir pris connaissance des <a href="doc/conditions_d_inscription_et_du_reglement_2021-2022.pdf" onclick="window.open(this.href); return false;">conditions d'inscription et du règlement</a> ainsi que les modalités qui me sont proposées.
+                      Je déclare avoir pris connaissance des <a href="doc/conditions_cours_adultes_2021-2022.pdf" onclick="window.open(this.href); return false;">conditions d'inscription et du règlement</a> ainsi que les modalités qui me sont proposées.
                       <input type="button" id="conditionIframeAff" class="btn-info" onclick="togg(this)" value="afficher">
                   </div>
 
@@ -279,7 +274,7 @@ session_start();
                   <button class="btn btn-default center-block submit">Envoyer</button>
                 </div>
                 <div class="col-md-12" id="conditionIframe" style="display: none">
-                    <iframe src="doc/conditions_d_inscription_et_du_reglement_2021-2022.pdf" width="90%" height="500" style="border: none;"></iframe>
+                    <iframe src="doc/conditions_cours_adultes_2021-2022.pdf" width="90%" height="500" style="border: none;"></iframe>
                 </div>
             </div>
 

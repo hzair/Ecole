@@ -271,7 +271,7 @@
                     Tél. portable <input type="text" name="portablePere" class="form-control" placeholder="Tél. portable du père" required>
                   </div>
                   <div class="col-md-12">
-                    Voulez-vous inscrir au cours <select id="coursAdultPere" name="coursAdultPere" class="form-control">
+                    Voulez-vous inscrire au cours <select id="coursAdultPere" name="coursAdultPere" class="form-control">
                                                   <option value="NON" class="form-control" selected>NON</option>
                                                   <option value="coursArabeAdulte" class="form-control" >Arabe adulte</option>
                                                   <option value="coursSciencesIslamiques" class="form-control" >Sciences islamiques</option>
@@ -295,7 +295,7 @@
                     Tél. portable <input type="text" name="portableMere" class="form-control" placeholder="Tél. portable du mère">
                   </div>
                   <div class="col-md-12">
-                    Voulez-vous inscrir au cours <select id="coursAdultMere" name="coursAdultPere" class="form-control">
+                    Voulez-vous inscrire au cours <select id="coursAdultMere" name="coursAdultPere" class="form-control">
                                                     <option value="NON" class="form-control" selected>NON</option>
                                                     <option value="coursArabeAdulte" class="form-control" >Arabe adulte</option>
                                                     <option value="coursSciencesIslamiques" class="form-control" >Sciences islamiques</option>
@@ -330,7 +330,7 @@
                   </div>
                   <div class="col-md-12">
                     <br/>
-                    Nombre d'enfants que vous souhaiez inscrir <input type="number" id="nbrEnfants" name="nbrEnfants" class="form-control" on="alert('message')" required>
+                    Nombre d'enfants que vous souhaiez inscrire <input type="number" id="nbrEnfants" name="nbrEnfants" class="form-control" on="alert('message')" required>
                   </div>
 
                 </div>

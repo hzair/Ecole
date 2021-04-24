@@ -179,34 +179,26 @@ if(!isset($_SESSION['idFoncInscription']) || !isset($_SESSION['idInscription']))
         $idInscription = $_SESSION['idInscription'];
 
         // Recuperation Pere
-        $findPereSql = "SELECT * FROM parent where id_inscription = '$idInscription' and  sexe= 'M'";
-        $PereRes = $mysqli->query($findPereSql, MYSQLI_STORE_RESULT_COPY_DATA) ;
-        $pere = $PereRes->fetch_array();
+        $findAdulteSql = "SELECT * FROM parent where id_inscription = '$idInscription'";
+        $AdulteRes = $mysqli->query($findAdulteSql, MYSQLI_STORE_RESULT_COPY_DATA) ;
+        $adulte = $AdulteRes->fetch_array();
 
-        // Recuperation Mere
-        $findMereSql = "SELECT * FROM parent where id_inscription = '$idInscription' and  sexe= 'F'";
-        $MereRes = $mysqli->query($findMereSql, MYSQLI_STORE_RESULT_COPY_DATA) ;
-        $mere = $MereRes->fetch_array();
 
-        if($pere) {
-            $adresse = $pere["adresse"];
-            $codePostale = $pere["code_postale"];
-            $ville = $pere["ville"];
-            $telFixe = $pere["telephone_fixe"];
-            $email = $pere["email"];
-        } else {
-            $adresse = $mere["adresse"];
-            $codePostale = $mere["code_postale"];
-            $ville = $mere["ville"];
-            $telFixe = $mere["telephone_fixe"];
-            $email = $mere["email"];
+        if($adulte) {
+            $adresse = $adulte["adresse"];
+            $codePostale = $adulte["code_postale"];
+            $ville = $adulte["ville"];
+            $telFixe = $adulte["telephone_fixe"];
+            $email = $adulte["email"];
+            $coursArabeAdulte = $adulte["cours_arabe_adulte"];
+            $coursSciencesIslamiques = $adulte["cours_sciences_islamiques"];
         }
         ?>
 
         <!-- Information parents -->
         <section id="inscrire" class="dark">
         <header class="title">
-          <h2>RENSEIGNEMENTS DES <span>PARENTS</span></h2>
+          <h2>RENSEIGNEMENTS DE <span>L'ADULTE</span></h2>
             <?php  if(isset($_SESSION['idFoncInscription']) ) { ?>
                 Votre identifiant d'inscription <a data-toggle="popover" title="Merci de le garder, il vous permettera de modifier votre inscription en inscrivant d'autres enfants ou adultes par exemple"> (+) </a>
             <input type="text" id="idFoncInscription" name="idFoncInscription" class="identifiantinscription"
@@ -237,11 +229,10 @@ if(!isset($_SESSION['idFoncInscription']) || !isset($_SESSION['idInscription']))
                     <div class="wrap animated" data-animate="fadeInDown">
                         <div class="col-md-12">
                             <address>
-                                <?php if ($pere) { ?>
-                                    <span><i class="fa fa-group fa-lg"></i> Mr <?php echo($pere["nom"]." ".$pere["prenom"]);?></span>
-                                <?php } ?>
-                                <?php if ($mere) { ?>
-                                    <span><i class="fa fa-group fa-lg"></i> Mme <?php echo($mere["nom"]." ".$mere["prenom"]);?></span>
+                                <?php if ($adulte) { ?>
+                                    <span><i class="fa fa-group fa-lg"></i>
+                                        <?php if($adulte['sexe'] == "M") echo("Mr "); else echo("Mme "); echo($adulte["nom"]." ".$adulte["prenom"]);?>
+                                    </span>
                                 <?php } ?>
                                 <span><i class="fa fa-phone fa-lg"></i>  <?php echo($telFixe);?></span>
                             </address>
@@ -252,9 +243,7 @@ if(!isset($_SESSION['idFoncInscription']) || !isset($_SESSION['idInscription']))
                       <address>
                           <span><i class="fa fa-map-marker fa-lg"></i> <?php echo($adresse." ".$codePostale." - ".$ville);?></span>
                           <span>
-                               <?php if ($pere) { ?><i class="fa fa-mobile-phone fa-lg"></i> <?php echo($pere["telephone_portable"]); ?>
-                              &nbsp; &nbsp;  <?php } ?>
-                              <?php if ($mere) { ?><i class="fa fa-mobile-phone fa-lg"></i> <?php echo($mere["telephone_portable"]); }?>
+                               <i class="fa fa-mobile-phone fa-lg"></i> <?php echo($adulte["telephone_portable"]); ?>
                           </span>
                           <span><i class="fa fa-envelope-o fa-lg"></i> <?php echo($email);?></span>
                       </address>
@@ -269,77 +258,22 @@ if(!isset($_SESSION['idFoncInscription']) || !isset($_SESSION['idInscription']))
                       </div>
                       <div class="col-md-6 animated" data-animate="fadeInLeft">
                           <div class="col-md-12">
-                              Liste inscriptions enfants :
+                              Vous avez inscrit au :
                           </div>
                           <?php
-                                    $idInsciption_ = $_SESSION['idInscription'];
-                                    $findEleveSql = "SELECT * from eleve where id_inscription='$idInsciption_' and type_cours='ENF'";
-                                    $mysqli = new mysqli(USE_SERVER_BDD, USE_LOGIN_BDD, USE_PASS_BDD, USE_NAME_BDD);
-
-                                    $result = $mysqli->query($findEleveSql, MYSQLI_STORE_RESULT_COPY_DATA) ;
-                                    if($result) {
-                                        $i = 0;
-                                        while ($data = mysqli_fetch_array($result)) {
-                                            $i++;
-                                            $sexe = $data['sexe'];
-                                            $prenom = $data['prenom'];
-                                            $nom = $data['nom'];;
-                                            $sexe = $data['sexe'];
-
-                                            echo('<div class="col-md-4">');
-                                            echo('<input type="text" name="enfant'.$i.'" class="alert enfant' . $sexe . '" value="' . $prenom .' " disabled>');
-                                            echo('</div>');
-                                        }
-                                        if ($i == 0) {
-                                            echo('<div class="col-md-4">');
-                                            echo(' - Aucun - ');
-                                            echo('</div>');
-                                        }
-                                    } else {
-                                        echo ('Erreur affichage eleves : ' . $mysqli->error);
-                                    }
-
+                            if($coursArabeAdulte) {
+                                echo('<div class="col-md-4">');
+                                echo('<input type="text" name="coursArabeAdulte" class="alert enfant' . $adulte['sexe']  . '" value=" Cours Arabe Adulte" disabled>');
+                                echo('</div>');
+                            }
+                            if($coursSciencesIslamiques) {
+                              echo('<div class="col-md-4">');
+                              echo('<input type="text" name="coursSciencesIslamiques" class="alert enfant' . $adulte['sexe'] . '" value="Cours Sciences Islamiques" disabled>');
+                              echo('</div>');
+                            }
                                 ?>
                       </div>
-                      <div class="col-md-6 animated" data-animate="fadeInRight">
-                          <div class="col-md-12">
-                              Liste inscriptions adultes :
-                          </div>
-                          <?php
-                              $idInsciption_ = $_SESSION['idInscription'];
-                              $findEleveSql = "SELECT * from eleve where id_inscription='$idInsciption_' and (type_cours='SCIENCES_ISLAMIQUES' or type_cours='ARABE')";
-                              $mysqli = new mysqli(USE_SERVER_BDD, USE_LOGIN_BDD, USE_PASS_BDD, USE_NAME_BDD);
 
-                              $result = $mysqli->query($findEleveSql, MYSQLI_STORE_RESULT_COPY_DATA) ;
-                              if($result) {
-                                  $i = 0;
-                                  while ($data = mysqli_fetch_array($result)) {
-                                      $i++;
-                                      $sexe = $data['sexe'];
-                                      $prenom = $data['prenom'];
-                                      $nom = $data['nom'];;
-                                      $sexe = $data['sexe'];
-                                      if($data['type_cours'] == "SCIENCES_ISLAMIQUES"){
-                                          $typeCoure = "Sc. Islamiques";
-                                      } else {
-                                          $typeCoure = "Cours Arabe";
-                                      }
-
-                                      echo('<div class="col-md-5">');
-                                      echo('<input type="text" name="enfant'.$i.'" class="alert enfant' . $sexe . '" value="' . $prenom .' ('. $typeCoure .')" disabled>');
-                                      echo('</div>');
-                                  }
-                                  if ($i == 0) {
-                                      echo('<div class="col-md-4">');
-                                      echo(' - Aucun - ');
-                                      echo('</div>');
-                                  }
-                              } else {
-                                  echo ('Erreur affichage eleves : ' . $mysqli->error);
-                              }
-
-                              ?>
-                      </div>
                   </div>
               </div>
 
@@ -352,14 +286,10 @@ if(!isset($_SESSION['idFoncInscription']) || !isset($_SESSION['idInscription']))
                           <br/>
                       </div>
                       <div class="col-md-6">
-                          <form action="ajouterEleves.php#eleves">
-                            <button class="btn btn-default center-block submit" >Inscrire Enfant</button>
-                          </form>
+
                       </div>
                       <div class="col-md-6">
-                          <form action="ajouterAdultes.php#adulte">
-                            <button class="btn btn-default center-block submit" href="#inscrirAdultes">Inscrire Adulte</button>
-                          </form>
+
                       </div>
                   </div>
               </div>

@@ -79,7 +79,7 @@ session_start();
           <nav class="navbar navbar-fixed-top navbar-default bottom">
             <div class="container">
               <div class="navbar-header">
-                <a class="navbar-brand" href="#header">Institut Espoire - Inscriptions</a>
+
               </div><!-- /.navbar-header -->
 
               <div class="collapse navbar-collapse" id="menu">
@@ -107,7 +107,13 @@ session_start();
 
                         <div class="slider-content">
                           <h1></h1>
-                          <p>Association Culturelle Educative De Bron</p>
+                          <p>Choisir ce que vous voulez inscrire :</p>
+                            <br/>
+                          <p>
+                              <a class="btn alert-danger btn-default submit" href="creerCompte.php#compte">Un ou plusieurs Enfants</a>
+                              &nbsp; &nbsp;
+                              <a class="btn  btn-default submit" href="creerCompteAdulte.php#adulte">Un Adulte Seul</a>
+                          </p>
                         </div>
 
                       </div> <!-- /.col-md-12 -->
@@ -126,11 +132,11 @@ session_start();
                                   title : "Inscription 2021-2022"
                                 },
                                 {
-                                  bigImage :"images/institut-espoire.png",
+                                  bigImage :"images/slide-2.jpg",
                                   title : "Institut Espoire"
                                 }
                             ],
-                loaderSVG = new SVGLoader(document.getElementById('loader'), {speedIn : 800, speedOut : 800, easingIn : mina.easeinout});
+                loaderSVG = new SVGLoader(document.getElementById('loader_'), {speedIn : 800, speedOut : 800, easingIn : mina.easeinout});
                 loaderSVG.show()
             </script>
 

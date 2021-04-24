@@ -181,7 +181,7 @@ session_start();
                     Tél. portable <input type="text" name="portablePere" class="form-control" placeholder="Tél. portable du père" required>
                   </div>
                   <div class="col-md-12">
-                    Voulez-vous inscrir au cours <select id="coursAdultPere" name="coursAdultPere" class="form-control" required>
+                    Voulez-vous inscrire au cours <select id="coursAdultPere" name="coursAdultPere" class="form-control" required>
                           <option value="" class="backgroundBlackColor" selected>--</option>
                           <option value="NON" class="backgroundBlackColor">NON</option>
                           <option value="coursArabeAdulte" class="backgroundBlackColor" >Arabe adulte</option>
@@ -206,7 +206,7 @@ session_start();
                     Tél. portable <input type="text" name="portableMere" class="form-control" placeholder="Tél. portable du mère" required>
                   </div>
                   <div class="col-md-12">
-                    Voulez-vous inscrir au cours <select id="coursAdultMere" name="coursAdultMere" class="form-control" required>
+                    Voulez-vous inscrire au cours <select id="coursAdultMere" name="coursAdultMere" class="form-control" required>
                                                     <option value="" class="backgroundBlackColor" selected>--</option>
                                                     <option value="NON" class="backgroundBlackColor">NON</option>
                                                     <option value="coursArabeAdulte" class="backgroundBlackColor" >Arabe adulte</option>

@@ -176,7 +176,7 @@ session_start();
                                 <?php  if(isset($_SESSION['idFoncInscription']) ) { ?>
                                 Votre identifiant d'inscription <a data-toggle="popover" title="Merci de le garder, il vous permettera de modifier votre inscription en ajoutant d'autres enfant par exemple"> (+) </a>
                                 <?php  } else { ?>
-                                Renseignez votre identifiant d'inscription <a data-toggle="popover" title="Merci de vous inscrir si vous ne possédez pas d'un numéro d'inscription"> (+) </a>
+                                Renseignez votre identifiant d'inscription <a data-toggle="popover" title="Merci de vous inscrire si vous ne possédez pas d'un numéro d'inscription"> (+) </a>
                                 <?php  } ?>
                                 <input type="text" id="idFoncInscription" name="idFoncInscription" class="identifiantinscription"
                                        value="<?php
@@ -214,7 +214,7 @@ session_start();
                                 Lieu de naissance <input type="text" id="lieuNaissAdulte" name="lieuNaissAdulte" class="form-control" placeholder="Lieu de naissance ... " required>
                             </div>
                             <div class="col-md-4">
-                                Inscrir au cours de<select id="coursAdult" name="coursAdult" class="form-control" required>
+                                Inscrire au cours de<select id="coursAdult" name="coursAdult" class="form-control" required>
                                     <option value="" class="backgroundBlackColor" selected>--</option>
                                     <option value="ARABE" class="backgroundBlackColor" >Arabe adulte</option>
                                     <option value="SCIENCES_ISLAMIQUES" class="backgroundBlackColor" >Sciences islamiques</option>

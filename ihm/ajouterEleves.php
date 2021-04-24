@@ -176,7 +176,7 @@ session_start();
                                 <?php  if(isset($_SESSION['idFoncInscription']) ) { ?>
                                 Votre identifiant d'inscription <a data-toggle="popover" title="Merci de le garder, il vous permettera de modifier votre inscription en ajoutant d'autres enfant par exemple"> (+) </a>
                                 <?php  } else { ?>
-                                Renseignez votre identifiant d'inscription <a data-toggle="popover" title="Merci de vous inscrir si vous ne possédez pas d'un numéro d'inscription"> (+) </a>
+                                Renseignez votre identifiant d'inscription <a data-toggle="popover" title="Merci de vous inscrire si vous ne possédez pas d'un numéro d'inscription"> (+) </a>
                                 <?php  } ?>
                                 <input type="text" id="idFoncInscription" name="idFoncInscription" class="identifiantinscription"
                                        value="<?php
@@ -253,9 +253,12 @@ session_start();
                             </div>
 
 
-                            <div class="col-md-12">
+                            <div class="col-md-06">
                                 <br/>
                                 <button class="btn btn-default center-block submit">Ajouter Eleve</button>
+                            </div>
+                            <div class="col-md-6">
+                                <a href="inscrire.php#inscrire"> Retour >> </a>
                                 <br/><br/>
                             </div>
                             <?php if(isset($_SESSION['idInscription'])) {?>

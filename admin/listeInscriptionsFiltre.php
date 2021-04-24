@@ -131,6 +131,7 @@
     if($listInscription) {
         $i = 0;
         while ($inscription = mysqli_fetch_array($listInscription)) {
+            $prenomAllEleves = "";
             $idInscription = $inscription['id'];
             $idFoncInscription = $inscription['id_fonc'];
             $dateInscription = $inscription['date'];
@@ -143,6 +144,29 @@
                 $prenomPere = $pere['prenom'];
                 $portablePere = $pere['telephone_portable'];
                 $emailPere = $pere['email'];
+                $coursArabeAdultePere = $pere['cours_arabe_adulte'];
+                $coursScienceIslamiquePere = $pere['cours_sciences_islamiques'];
+                if($pere['cours_arabe_adulte'] && $pere['cours_sciences_islamiques']) {
+                    $prenomAllEleves = $prenomAllEleves . "<br/> "
+                        . "<a href='FicheInscriptionAdulte.php?idAdulte=" . $pere["id"] . "&idInscription=" . $idInscription . "' onclick='window.open(this.href); return false;'>"
+                        . $pere['prenom'] . " </a> <b>(" . getTypeCours('ARABE') . " et " . getTypeCours('SCIENCES_ISLAMIQUES') .")</b>";
+                } else {
+                    if ($pere['cours_arabe_adulte']) {
+                        $prenomAllEleves = $prenomAllEleves . "<br/> "
+                            . "<a href='FicheInscriptionAdulte.php?idAdulte=" . $pere["id"] . "&idInscription=" . $idInscription . "' onclick='window.open(this.href); return false;'>"
+                            . $pere['prenom'] . " </a> <b>(" . getTypeCours('ARABE') . ")</b>";
+                    }
+                    if ($pere['cours_sciences_islamiques']) {
+                        $prenomAllEleves = $prenomAllEleves . "<br/> "
+                            . "<a href='FicheInscriptionAdulte.php?idAdulte=" . $pere["id"] . "&idInscription=" . $idInscription . "' onclick='window.open(this.href); return false;'>"
+                            . $pere['prenom'] . " </a> <b>(" . getTypeCours('SCIENCES_ISLAMIQUES') . ")</b>";
+                    }
+                }
+            } else {
+                $nomPere = "";
+                $prenomPere = "";
+                $portablePere = "";
+                $emailPere = "";
             }
 
             // Recuperation Mere
@@ -153,6 +177,28 @@
                 $nomMere = $mere['nom'];
                 $prenomMere = $mere['prenom'];
                 $portableMere = $mere['telephone_portable'];
+                $emailMere = $mere['email'];
+                if($mere['cours_arabe_adulte'] && $mere['cours_sciences_islamiques']) {
+                    $prenomAllEleves = $prenomAllEleves . "<br/> "
+                        . "<a href='FicheInscriptionAdulte.php?idAdulte=" . $mere["id"] . "&idInscription=" . $idInscription . "' onclick='window.open(this.href); return false;'>"
+                        . $mere['prenom'] . " </a> <b>(" . getTypeCours('ARABE') . " et " . getTypeCours('SCIENCES_ISLAMIQUES') .")</b>";
+                } else {
+                    if ($mere['cours_arabe_adulte']) {
+                        $prenomAllEleves = $prenomAllEleves . "<br/> "
+                            . "<a href='FicheInscriptionAdulte.php?idAdulte=" . $mere["id"] . "&idInscription=" . $idInscription . "' onclick='window.open(this.href); return false;'>"
+                            . $mere['prenom'] . " </a> <b>(" . getTypeCours('ARABE') . ")</b>";
+                    }
+                    if ($mere['cours_sciences_islamiques']) {
+                        $prenomAllEleves = $prenomAllEleves . "<br/> "
+                            . "<a href='FicheInscriptionAdulte.php?idAdulte=" . $mere["id"] . "&idInscription=" . $idInscription . "' onclick='window.open(this.href); return false;'>"
+                            . $mere['prenom'] . " </a> <b>(" . getTypeCours('SCIENCES_ISLAMIQUES') . ")</b>";
+                    }
+                }
+            } else {
+                $nomMere = "";
+                $prenomMere = "";
+                $portableMere = "";
+                $emailMere = "";
             }
 
 
@@ -162,9 +208,10 @@
 
             if($EleveRes) {
                 $nbrEleve = 0;
-                $prenomAllEleves = "";
                 while($eleve = $EleveRes->fetch_array()) {
-                    $prenomAllEleves = $prenomAllEleves . "<br/> " .$eleve['prenom'] . " <b>(".getTypeCours($eleve['type_cours']).")</b>";
+                    $prenomAllEleves = $prenomAllEleves . "<br/> "
+                        ."<a href='FicheInscriptionEnfant.php?idEleve=".$eleve["id"]."&idInscription=".$idInscription."' onclick='window.open(this.href); return false;'>"
+                        .$eleve['prenom'] . " </a> <b>(".getTypeCours($eleve['type_cours']).")</b>";
                     $nbrEleve++;
                 }
                     ?>
@@ -179,7 +226,7 @@
                         <td> <?php echo($portablePere);?></td>
                         <td><?php echo($nomMere ." ". $prenomMere);?> </td>
                         <td><?php echo($portableMere);?></td>
-                        <td><?php echo($emailPere);?></td>
+                        <td><?php echo(getValNonNul($emailPere, $emailMere));?></td>
                         <td><?php echo($prenomAllEleves);?></td>
                     </tr>
                     <?php
@@ -191,14 +238,20 @@
     }
 
 
+    function getValNonNul($val1, $val2) {
+        if($val1 == null || $val1 == "")
+            return $val2;
+        return $val1;
+    }
+
     function getNbrEleves($idInscription, $mysqli) {
         $nbrEnfantsSql = "SELECT count(*) FROM eleve where id_inscription = '$idInscription'";
         $nbrEleveRes = $mysqli->query($nbrEnfantsSql, MYSQLI_STORE_RESULT_COPY_DATA) ;
 
         if($nbrEleveRes) {
-            $nbrEleve = $nbrEleveRes->fetch_array();
-            if($nbrEleve) {
-                return $nbrEleve['count(*)'];
+            $nbrEleve_ = $nbrEleveRes->fetch_array();
+            if($nbrEleve_) {
+                return $nbrEleve_['count(*)'];
             }
         }
         return 0;
