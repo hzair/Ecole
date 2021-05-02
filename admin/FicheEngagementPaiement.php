@@ -101,7 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 <body>
 
-<!--<p align="center"><img align="center" src="../ihm/images/institut-espoire.png"></p>-->
+<!--<p align="center"><img align="center" src="../ihm/images/institut-espoir.png"></p>-->
 
 <p align="center" class="backgroundTitreColor"> FICHE D’ENGAGEMENT ET DE PAIEMENT 2021-2022</p>
 <!--<p align="center" class="backgroundAnneeColor"> 2021-2022 </p>-->

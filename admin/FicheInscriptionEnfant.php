@@ -127,7 +127,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 </head>
 <body>
 
-<p align="center"><img align="center" src="../ihm/images/institut-espoire.png"></p>
+<p align="center"><img align="center" src="../ihm/images/institut-espoir.png"></p>
 
 <br/>
 

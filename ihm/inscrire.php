@@ -106,7 +106,7 @@ if(!isset($_SESSION['idFoncInscription']) || !isset($_SESSION['idInscription']))
           <nav class="navbar navbar-fixed-top navbar-default bottom">
             <div class="container">
               <div class="navbar-header">
-                <a class="navbar-brand" href="#header">Institut Espoire - Inscriptions</a>
+                <a class="navbar-brand" href="#header">Institut Espoir - Inscriptions</a>
               </div><!-- /.navbar-header -->
 
               <div class="collapse navbar-collapse" id="menu">
@@ -162,8 +162,8 @@ if(!isset($_SESSION['idFoncInscription']) || !isset($_SESSION['idInscription']))
                                   title : "Inscription 2021-2022"
                                 },
                                 {
-                                  bigImage :"images/institut-espoire.png",
-                                  title : "Institut Espoire"
+                                  bigImage :"images/institut-espoir.png",
+                                  title : "Institut Espoir"
                                 }
                             ],
                 loaderSVG = new SVGLoader(document.getElementById('loader'), {speedIn : 800, speedOut : 800, easingIn : mina.easeinout});
@@ -378,7 +378,7 @@ if(!isset($_SESSION['idFoncInscription']) || !isset($_SESSION['idInscription']))
             <div class="row">
               <div class="col-md-12 text-center">
                 <p>ASSOCIATION CULTURELLE EDUCATIVE DE BRON</p>
-                <p><i class="fa fa-heart"></i><small>  Institut Espoire  </small><i class="fa fa-heart"></i></p>
+                <p><i class="fa fa-heart"></i><small>  Institut Espoir  </small><i class="fa fa-heart"></i></p>
               </div>
             </div>
           </div>

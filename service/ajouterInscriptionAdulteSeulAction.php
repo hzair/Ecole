@@ -142,7 +142,7 @@ function generateAndVerifyIfExistIdFoncInBdd($mysqli){
 
 function envoiEmail($destination, $message) {
     $from = "nepasrepondre@institutespoir.fr";
-    $subject = "Inscription : Création Compte Institut Espoire";
+    $subject = "Inscription : Création Compte Institut Espoir";
     $headers = "De :" . $from;
     mail($destination,$subject,$message, $headers);
 }
@@ -154,5 +154,5 @@ function creationCompteMessage($nom, $idFoncInsc){
                 ."\n \n \n"
                 ."Cordialement"
                 ."\n"
-                ."Institut Espoire";
+                ."Institut Espoir";
 }

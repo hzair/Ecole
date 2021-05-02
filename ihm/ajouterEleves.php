@@ -59,7 +59,7 @@ session_start();
         <nav class="navbar navbar-fixed-top navbar-default bottom">
             <div class="container">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#header">Institut Espoire - Inscriptions</a>
+                    <a class="navbar-brand" href="#header">Institut Espoir - Inscriptions</a>
                 </div><!-- /.navbar-header -->
 
                 <div class="collapse navbar-collapse" id="menu">
@@ -115,8 +115,8 @@ session_start();
                             title : "Inscription 2021-2022"
                         },
                         {
-                            bigImage :"images/institut-espoire.png",
-                            title : "Institut Espoire"
+                            bigImage :"images/institut-espoir.png",
+                            title : "Institut Espoir"
                         }
                     ],
                     loaderSVG = new SVGLoader(document.getElementById('loader'), {speedIn : 800, speedOut : 800, easingIn : mina.easeinout});
@@ -229,7 +229,38 @@ session_start();
                                 </select>
                             </div>
                             <div class="col-md-4">
-                                N° de Classe  <input type="text" id="numClasseEleve" name="numClasseEleve" class="form-control" placeholder="N° de Classe ... " disabled>
+                                N° de Classe
+                                <select id="numClasseEleve" name="numClasseEleve" class="form-control" disabled>
+                                    <option value="" class="backgroundBlackColor" selected>--</option>
+                                    <option value="C 01 - N 2A" class="backgroundBlackColor" >C 01 - N 2A</option>
+                                    <option value="C 04 - N 1B" class="backgroundBlackColor" >C 04 - N 1B</option>
+                                    <option value="C 05 - N 1A" class="backgroundBlackColor" >C 05 - N 1A</option>
+                                    <option value="C 07 - N 2A" class="backgroundBlackColor" >C 07 - N 2A</option>
+                                    <option value="C 08 - N 1B" class="backgroundBlackColor" >C 08 - N 1B</option>
+                                    <option value="C 09 - N 1A" class="backgroundBlackColor" >C 09 - N 1A</option>
+                                    <option value="C 10 - N 2B" class="backgroundBlackColor" >C 10 - N 2B</option>
+                                    <option value="C 11 - N 1A" class="backgroundBlackColor" >C 11 - N 1A</option>
+                                    <option value="C 12 - N 1B" class="backgroundBlackColor" >C 12 - N 1B</option>
+                                    <option value="C 14 - N 1B" class="backgroundBlackColor" >C 14 - N 1B</option>
+                                    <option value="C 15 - N 1A" class="backgroundBlackColor" >C 15 - N 1A</option>
+                                    <option value="C 16 - N 1A" class="backgroundBlackColor" >C 16 - N 1A</option>
+                                    <option value="C 17 - N 3B" class="backgroundBlackColor" >C 17 - N 3B</option>
+                                    <option value="C 18 – N1B S" class="backgroundBlackColor" >C 18 – N1BS</option>
+                                    <option value="C 19 - N 2A" class="backgroundBlackColor" >C 19 - N 2A</option>
+                                    <option value="C 20 - N 1B" class="backgroundBlackColor" >C 20 - N 1B</option>
+                                    <option value="C 21 - N 4A" class="backgroundBlackColor" >C 21 - N 4A</option>
+                                    <option value="C 22 - N 1A" class="backgroundBlackColor" >C 22 - N 1A</option>
+                                    <option value="C 23 - N 2B" class="backgroundBlackColor" >C 23 - N 2B</option>
+                                    <option value="C 24 - N 1B" class="backgroundBlackColor" >C 24 - N 1B</option>
+                                    <option value="C 25 - N 5B" class="backgroundBlackColor" >C 25 - N 5B</option>
+                                    <option value="C 25 bis - N 3B" class="backgroundBlackColor" >C 25 bis - N 3B</option>
+                                    <option value="C 26 - N 2B" class="backgroundBlackColor" >C 26 - N 2B</option>
+                                    <option value="C 27 - N 3B" class="backgroundBlackColor" >C 27 - N 3B</option>
+                                    <option value="C 28 - N 2A" class="backgroundBlackColor" >C 28 - N 2A</option>
+                                    <option value="C 29 - N 1A" class="backgroundBlackColor" >C 29 - N 1A</option>
+                                    <option value="C ADOS F" class="backgroundBlackColor" >C ADOS F</option>
+                                    <option value="C ADOS G1" class="backgroundBlackColor" >C ADOS G1</option>
+                                </select>
                             </div>
 
                             <div class="col-md-6">
@@ -356,7 +387,7 @@ session_start();
                 <div class="row">
                     <div class="col-md-12 text-center">
                         <p>ASSOCIATION CULTURELLE EDUCATIVE DE BRON</p>
-                        <p><i class="fa fa-heart"></i><small>  Institut Espoire  </small><i class="fa fa-heart"></i></p>
+                        <p><i class="fa fa-heart"></i><small>  Institut Espoir </small><i class="fa fa-heart"></i></p>
                     </div>
                 </div>
             </div>

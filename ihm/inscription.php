@@ -63,7 +63,7 @@
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#header">Institut Espoire - Inscriptions</a>
+                <a class="navbar-brand" href="#header">Institut Espoir - Inscriptions</a>
               </div><!-- /.navbar-header -->
 
               <div class="collapse navbar-collapse" id="menu">
@@ -142,8 +142,8 @@
                                   title : "Inscription 2021-2022"
                                 },
                                 {
-                                  bigImage :"images/institut-espoire.png",
-                                  title : "Institut Espoire"
+                                  bigImage :"images/institut-espoir.png",
+                                  title : "Institut Espoir"
                                 }
                             ],
                 loaderSVG = new SVGLoader(document.getElementById('loader'), {speedIn : 500, speedOut : 500, easingIn : mina.easeinout});
@@ -644,7 +644,7 @@
             <div class="row">
               <div class="col-md-12 text-center">
                 <p>ASSOCIATION CULTURELLE EDUCATIVE DE BRON</p>
-                <p><i class="fa fa-heart"></i><small>  Institut Espoire  </small><i class="fa fa-heart"></i></p>
+                <p><i class="fa fa-heart"></i><small>  Institut Espoir  </small><i class="fa fa-heart"></i></p>
               </div>
             </div>
           </div>

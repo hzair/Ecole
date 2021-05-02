@@ -133,7 +133,7 @@ session_start();
                                 },
                                 {
                                   bigImage :"images/slide-2.jpg",
-                                  title : "Institut Espoire"
+                                  title : "Institut Espoir"
                                 }
                             ],
                 loaderSVG = new SVGLoader(document.getElementById('loader_'), {speedIn : 800, speedOut : 800, easingIn : mina.easeinout});
@@ -193,7 +193,7 @@ session_start();
             <div class="row">
               <div class="col-md-12 text-center">
                 <p>ASSOCIATION CULTURELLE EDUCATIVE DE BRON</p>
-                <p><i class="fa fa-heart"></i><small>  Institut Espoire  </small><i class="fa fa-heart"></i></p>
+                <p><i class="fa fa-heart"></i><small>  Institut Espoir  </small><i class="fa fa-heart"></i></p>
               </div>
             </div>
           </div>
