@@ -84,7 +84,7 @@ session_start();
 
               <div class="collapse navbar-collapse" id="menu">
                 <ul class="nav navbar-nav navbar-right">
-                  <li><a href="#connexion">Connexion/Nouveau</a></li>
+                  <li><a href="#connexion">Connexion</a></li>
                 </ul>
               </div> <!-- /.navbar-collapse -->
             </div> <!-- /.container -->
@@ -108,12 +108,16 @@ session_start();
                         <div class="slider-content">
                           <h1></h1>
                           <p>Choisir ce que vous voulez inscrire :</p>
-                            <br/>
                           <p>
                               <a class="btn alert-danger btn-default submit" href="creerCompte.php#compte">Un ou plusieurs Enfants</a>
                               &nbsp; &nbsp;
                               <a class="btn  btn-default submit" href="creerCompteAdulte.php#adulte">Un Adulte Seul</a>
                           </p>
+                            <br/>
+                            <p>Si vous avez déjà un compte, connectez-vous pour ajouter une nouvelle inscription</p>
+                            <p>
+                                <a class="btn alert-danger btn-default submit" href="#connexion">CONNECTEZ-VOUS</a>
+                            </p>
                         </div>
 
                       </div> <!-- /.col-md-12 -->
@@ -149,7 +153,7 @@ session_start();
         <!-- FORMULAIRE - CONTACTER NOUS -->
          <section id="connexion" class="dark">
           <header class="title">
-            <h2>Se connecter <span>ou</span> créer un compte</h2>
+            <h2><span>Se connecter</span></h2>
             <p>Si vous avez déjà créé votre compte, connectez-vous et modifiez votre inscription. Sinon créez un nouveau compte</p>
           </header>
           <div class="container">
@@ -175,9 +179,6 @@ session_start();
                         </div>
                         <div class="col-md-3">
                             <button class="btn alert-info btn-default submit">Se connecter</button>
-                        </div>
-                        <div class="col-md-12">
-                            <a href="creerCompte.php#compte"> Créer nouveau Compte </a>
                         </div>
                   </div>
                 </form>

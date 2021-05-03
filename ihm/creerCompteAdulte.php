@@ -265,7 +265,7 @@ session_start();
                   <div class="col-md-12">
                       <input type="checkbox" name="condition" rows="1" required>
                       Je déclare avoir pris connaissance des <a href="doc/conditions_cours_adultes_2021-2022.pdf" onclick="window.open(this.href); return false;">conditions d'inscription et du règlement</a> ainsi que les modalités qui me sont proposées.
-                      <input type="button" id="conditionIframeAff" class="btn-info" onclick="togg(this)" value="afficher">
+                      <!--<input type="button" id="conditionIframeAff" class="btn-info" onclick="togg(this)" value="afficher">-->
                   </div>
 
                 </div>
