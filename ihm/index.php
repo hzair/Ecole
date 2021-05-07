@@ -154,7 +154,7 @@ session_start();
          <section id="connexion" class="dark">
           <header class="title">
             <h2><span>Se connecter</span></h2>
-            <p>Si vous avez déjà créé votre compte, connectez-vous et modifiez votre inscription. Sinon créez un nouveau compte</p>
+            <p>Si vous avez déjà un compte, connectez-vous en utilisant votre identifiant reçu par mail, pour ajouter une autre inscription</p>
           </header>
           <div class="container">
             <div class="row">

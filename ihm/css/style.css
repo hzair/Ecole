@@ -30,6 +30,12 @@
     background-size: cover;
     font-weight:bold;
 }
+.rdvColor{
+    color: red;
+    font-size: 18px;
+    background-size: cover;
+    font-weight:bold;
+}
 
 .backgroundAnneeColor{
     background-color: #0b1e8d;

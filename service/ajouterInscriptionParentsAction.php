@@ -166,16 +166,29 @@ function generateAndVerifyIfExistIdFoncInBdd($mysqli){
 function envoiEmail($destination, $message) {
     $from = "nepasrepondre@institutespoir.fr";
     $subject = "Inscription : Création Compte Institut Espoir";
-    $headers = "De :" . $from;
+
+    $headers  = 'MIME-Version: 1.0' . "\n"; // Version MIME
+    $headers .= 'Reply-To: '.$from."\n"; // Mail de reponse
+    $headers .= 'From: "Ecole - Institut Espoir"<'.$from.'>'."\n"; // Expediteur
+
     mail($destination,$subject,$message, $headers);
 }
 
 function creationCompteMessage($nom, $idFoncInsc){
-    return "Bonjour Mr, Mme ".$nom. "\n"
-                ."Votre compte est bien créé. Vous pouvez utilisé votre identifiant ci-dessous pour les inscriptions \n \n"
-                ."Identifiant d'inscription : " .$idFoncInsc
-                ."\n \n \n"
-                ."Cordialement"
-                ."\n"
-                ."Institut Espoir";
+    return "Bonjour Mr, Mme ".$nom. "\n".
+        "Votre compte est bien créé. Vous pouvez utiliser votre identifiant ci-dessous pour une autre inscription. \n" .
+        "Identifiant d'inscription : ".$idFoncInsc ."\n \n".
+
+        "Pour valider l’inscription vous devez prendre un RDV avec la direction au plus tard le 25/05/2021 en utilisant le lien suivant : \n" .
+
+        "http://rdv.ecole.institutespoir.fr/  \n \n".
+
+        "Pour plus d’informations contacter la direction, en préférence, par SMS ou par Mail : \n".
+
+        "Tel : 0687931689 \n" .
+
+        "Mail : inscriptions.Institutespoir@gmail.com \n \n" .
+
+        "Cordialement \n" .
+        "Institut Espoir";
 }

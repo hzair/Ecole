@@ -213,6 +213,12 @@ if(!isset($_SESSION['idFoncInscription']) || !isset($_SESSION['idInscription']))
                    value="<?php
                        echo($_SESSION['idFoncInscription']);
                    } ?> " disabled>
+            <br/>
+            <i class="fa fa-calendar rdvColor" aria-hidden="true">
+
+            Pour valider l’inscription vous devez prendre un RDV en cliquant <a href="http://rdv.ecole.institutespoir.fr" onclick="window.open(this.href);return false">ICI</a> au plus tard le 25/05/2021
+            </i>
+
 
         </header>
         <div class="container">
@@ -361,6 +367,9 @@ if(!isset($_SESSION['idFoncInscription']) || !isset($_SESSION['idInscription']))
                             <button class="btn btn-default center-block submit" href="#inscrirAdultes">Inscrire Adulte</button>
                           </form>
                       </div>
+
+
+
                   </div>
               </div>
 
