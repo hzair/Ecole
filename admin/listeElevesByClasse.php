@@ -193,7 +193,7 @@ if($_POST['numClasseEleve']) {
         <th>Action</th>
         <th data-filter-control="input" data-sortable="true">Nom</th>
         <th data-filter-control="input" data-sortable="true">Prenom</th>
-        <th data-filter-control="input" data-sortable="true">Sexe</th>
+        <!-- <th data-filter-control="input" data-sortable="true">Sexe</th> -->
         <th data-filter-control="input" data-sortable="true">Date Naissance</th>
         <th data-filter-control="input" data-sortable="true">N° Téléphone du père</th>
         <th data-filter-control="input" data-sortable="true">N° Téléphone de la mère</th>
@@ -216,7 +216,7 @@ if($_POST['numClasseEleve']) {
 
 
 
-    $findAllElevesSql = "SELECT * from eleve where num_annee_prec_ici = '$numClassChoisi'";
+    $findAllElevesSql = "SELECT * from eleve where num_annee_prec_ici = '$numClassChoisi' order by ";
     $listEleves = $mysqli->query($findAllElevesSql, MYSQLI_STORE_RESULT_COPY_DATA) ;
     if($listEleves) {
         $i = 0;

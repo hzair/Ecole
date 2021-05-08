@@ -137,8 +137,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 <p align="center" class="backgroundTitreColor"> FICHE D’INSCRIPTION <?php echo($typeCours);?> </p>
 <p align="center" class="backgroundAnneeColor"> 2021-2022 </p>
 
-<br/>
-<br/>
 
 <p align="left" class="backgroundTitre2Color"> INFORMATIONS DES PARENTS</p>
 <?php

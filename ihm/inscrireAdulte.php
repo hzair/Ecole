@@ -208,7 +208,7 @@ if(!isset($_SESSION['idFoncInscription']) || !isset($_SESSION['idInscription']))
 
             <br/>
             <i class="fa fa-calendar rdvColor" aria-hidden="true">
-                Pour valider l’inscription vous devez prendre un RDV en cliquant <a href="http://rdv.ecole.institutespoir.fr" onclick="window.open(this.href);return false">ICI</a> au plus tard le 25/05/2021
+                <a class="rdvColor"  href="http://rdv.ecole.institutespoir.fr" onclick="window.open(this.href);return false"> Pour valider l’inscription vous devez prendre un RDV en cliquant ICI au plus tard le 25/05/2021 </a>
             </i>
 
         </header>

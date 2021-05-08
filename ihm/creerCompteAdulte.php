@@ -258,7 +258,7 @@ session_start();
                             <option value="" class="backgroundBlackColor" selected>--</option>
                             <option value="coursArabeAdulte" class="backgroundBlackColor" >Arabe adulte</option>
                             <option value="coursSciencesIslamiques" class="backgroundBlackColor" >Sciences islamiques</option>
-                            <option value="coursLesDeux" class="backgroundBlackColor" >Arabe adulte & sciences islamiques</option>
+                            <!--<option value="coursLesDeux" class="backgroundBlackColor" >Arabe adulte & sciences islamiques</option>-->
                         </select>
                     </div>
 
