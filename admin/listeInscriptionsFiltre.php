@@ -56,6 +56,14 @@
 
 <script language="JavaScript" type="text/javascript">
 
+    function modifierEleve(idEleve, idFoncInscription, id){
+        var formElmt = document.getElementById("modiff_eleve_form");
+        formElmt.idEleve.value = idEleve;
+        formElmt.idFoncInscription.value = idFoncInscription;
+        formElmt.idInscription.value = id;
+        formElmt.submit();
+    }
+
     function supprimerInscription(idFonc, id){
         if(confirm("Voulez-vous supprimer définitivement cette inscription avec l'identifiant '" + idFonc + "' ?")) {
             var formElmt = document.getElementById("supp_inscription_form");
@@ -80,6 +88,14 @@
     }
 
 </script>
+
+<form action="modifierEleve.php" method="post" id="modiff_eleve_form" >
+    <INPUT TYPE="hidden" id="idEleve" name="idEleve" value="">
+    <INPUT TYPE="hidden" id= "idInscription" name="idInscription" value="">
+    <INPUT TYPE="hidden" id= "idFoncInscription" name="idFoncInscription" value="">
+    <INPUT TYPE='hidden' name='returnPage' value="admin/listeInscriptionsFiltre.php">
+    <INPUT TYPE='hidden' name='returnErrorPage' value="admin/listeInscriptionsFiltre.php">
+</form>
 
 <form action="deleteInscriptionAction.php" method="post" id="supp_inscription_form" >
     <INPUT TYPE="hidden" id="idFoncInscription" name="idFoncInscription" value="">
@@ -215,9 +231,15 @@
             if($EleveRes) {
                 $nbrEleve = 0;
                 while($eleve = $EleveRes->fetch_array()) {
+                    $idEleve = $eleve["id"];
                     $prenomAllEleves = $prenomAllEleves . "<br/> "
                         ."<a href='FicheInscriptionEnfant.php?idEleve=".$eleve["id"]."&idInscription=".$idInscription."' onclick='window.open(this.href); return false;'>"
-                        .$eleve['prenom'] . " </a> <b>(".getTypeCours($eleve['type_cours']).")</b>";
+                        .$eleve['prenom'] . " </a> <b>(".getTypeCours($eleve['type_cours']).")</b>"
+                        ."<img src='../ihm/images/edit-icon.png' height='20' width='20' title='modification' alt='modification' onclick='modifierEleve(\"".$idEleve."\",\"".$idFoncInscription."\",\"".$idInscription."\")' >";
+
+                   // $prenomAllEleves = $prenomAllEleves . '<img src="../ihm/images/edit-icon.png" height="20" width="20" title="modification" alt="Modification" onclick="modifierEleve(\''.$eleve["id"].'\',\''.$idFoncInscription.'\',\''.$idInscription.'\')>';
+;
+
                     $nbrEleve++;
                 }
                     ?>
