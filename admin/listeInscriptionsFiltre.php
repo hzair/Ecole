@@ -65,7 +65,7 @@
         }
     }
 
-    function modiferInscription(idFonc, id){
+    function modifierCompteParent(idFonc, id){
         var formElmt = document.getElementById("modif_inscription_form");
         formElmt.idFoncInscription.value = idFonc;
         formElmt.idInscription.value = id;
@@ -87,7 +87,7 @@
     <INPUT TYPE='hidden' name='returnPage' value="admin/listeInscriptionsFiltre.php">
     <INPUT TYPE='hidden' name='returnErrorPage' value="admin/listeInscriptionsFiltre.php">
 </form>
-<form action="majInscriptionAction.php" method="post" id="modif_inscription_form" >
+<form action="modifierCompteParents.php" method="post" id="modif_inscription_form" >
     <INPUT TYPE="hidden" id="idFoncInscription" name="idFoncInscription" value="">
     <INPUT TYPE="hidden" id= "idInscription" name="idInscription" value="">
     <INPUT TYPE='hidden' name='returnPage' value="admin/listeInscriptionsFiltre.php">
@@ -223,7 +223,8 @@
                     ?>
                     <tr>
                         <th>
-                            <img src="../ihm/images/fiche_engagement.png" title="Fiche Engagement" alt="Fiche Engagement" onclick="ficheEngagementPaiementInscription(<?php echo('\''.$idFoncInscription.'\',\''.$idInscription.'\'');?>);">
+                            <img src="../ihm/images/fiche_engagement.png"  title="Fiche Engagement" alt="Fiche Engagement" onclick="ficheEngagementPaiementInscription(<?php echo('\''.$idFoncInscription.'\',\''.$idInscription.'\'');?>);">
+                            <img src="../ihm/images/edit-icon.png" height="20" width="20" title="modification" alt="Modification" onclick="modifierCompteParent(<?php echo('\''.$idFoncInscription.'\',\''.$idInscription.'\'');?>);">
                             <img src="../ihm/images/icone-delete.png" title="Suppression" alt="Suppression" onclick="supprimerInscription(<?php echo('\''.$idFoncInscription.'\',\''.$idInscription.'\'');?>);">
 
                         </th>

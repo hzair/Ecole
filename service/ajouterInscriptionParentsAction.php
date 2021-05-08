@@ -32,8 +32,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     // Generer ID fonctionnel d'inscription
     $idFoncInscr = generateAndVerifyIfExistIdFoncInBdd($mysqli);
 
+    $parentsSepare = $_POST['parentsSepare'];
 
-    $sql = "INSERT INTO `inscription` (`id`, `id_fonc`, `id_pere`, `id_mere`, `date`, `parents_separe`) VALUES (NULL, '$idFoncInscr', NULL, NULL, NOW(), NULL)";
+    $sql = "INSERT INTO `inscription` (`id`, `id_fonc`, `id_pere`, `id_mere`, `date`, `parents_separe`) VALUES (NULL, '$idFoncInscr', NULL, NULL, NOW(), '$parentsSepare')";
     $result = $mysqli->query($sql);
     if($result){
         $sql2 = "SELECT id FROM inscription where id_fonc = '$idFoncInscr'";
@@ -68,7 +69,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $coursArabeAdulteMere = 0;
     $coursSciencesIslamiquesMere = 0;
 
-    $parentsSepare = $_POST['parentsSepare'];
+
     $email = $_POST['email'];
     $telephoneFixe = $_POST['telephoneFixe'];
     $adresse = $_POST['adressePostale'];
