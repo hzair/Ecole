@@ -123,7 +123,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         if ($result2) {
 
             // Envoyer Email
-            envoiEmail($email, creationCompteMessage($nomPere, $idFoncInscr));
+            //envoiEmail($email, creationCompteMessage($nomPere, $idFoncInscr));
 
             unset($_SESSION['messageError']);
             $_SESSION['idInscription'] = $idInscription;

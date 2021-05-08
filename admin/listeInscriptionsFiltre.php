@@ -48,6 +48,12 @@
 </head>
 <body>
 
+<?php
+    if (!isset($_SESSION['ADMIN_IS_CONNECT'])) {
+        header("Location: index.php");
+    }
+?>
+
 <script language="JavaScript" type="text/javascript">
 
     function supprimerInscription(idFonc, id){

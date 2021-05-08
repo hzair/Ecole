@@ -104,8 +104,77 @@ if (!isset($_SESSION['ADMIN_IS_CONNECT'])) {
     <INPUT TYPE='hidden' name='returnPage' value="admin/listeElevesFiltre.php">
     <INPUT TYPE='hidden' name='returnErrorPage' value="admin/listeElevesFiltre.php">
 </form>
+<table border="1" align="center" style="background-color: #1d1d1d; ">
+    <thead>
+    <tr>
+        <th style="color: white"><a href="listeInscriptionsFiltre.php" style="color: white">&nbsp; &nbsp;La liste des Inscriptions&nbsp; &nbsp;</a></th>
+        <th style="color: white"><a href="listeElevesFiltre.php" style="color: white"> &nbsp; &nbsp;La liste des Eleves&nbsp; &nbsp;</a></th>
+        <th style="color: white"><a href="listeElevesByClasse.php" style="color: white">&nbsp; &nbsp;La liste des Eleves Par classe &nbsp; &nbsp;</a></th>
+        <th style="color: white"><a href="deconnexion.php" style="color: white">&nbsp; &nbsp;Déconnexion&nbsp; &nbsp;</a></th>
+    </tr>
+    </thead>
 
-<p align="center" class="backgroundTitreColor"> Liste des <span>Elèves</span></p>
+</table>
+
+<form class="box" action="" method="post" name="classe">
+    <h1 class="box-title">Choisir la classe :
+
+    <select id="numClasseEleve" name="numClasseEleve"  required>
+        <option value="" class="backgroundBlackColor" selected>--</option>
+        <option value="C 01 - N 2A" class="backgroundBlackColor" >C 01 - N 2A</option>
+        <option value="C 04 - N 1B" class="backgroundBlackColor" >C 04 - N 1B</option>
+        <option value="C 05 - N 1A" class="backgroundBlackColor" >C 05 - N 1A</option>
+        <option value="C 07 - N 2A" class="backgroundBlackColor" >C 07 - N 2A</option>
+        <option value="C 08 - N 1B" class="backgroundBlackColor" >C 08 - N 1B</option>
+        <option value="C 09 - N 1A" class="backgroundBlackColor" >C 09 - N 1A</option>
+        <option value="C 10 - N 2B" class="backgroundBlackColor" >C 10 - N 2B</option>
+        <option value="C 11 - N 1A" class="backgroundBlackColor" >C 11 - N 1A</option>
+        <option value="C 12 - N 1B" class="backgroundBlackColor" >C 12 - N 1B</option>
+        <option value="C 14 - N 1B" class="backgroundBlackColor" >C 14 - N 1B</option>
+        <option value="C 15 - N 1A" class="backgroundBlackColor" >C 15 - N 1A</option>
+        <option value="C 16 - N 1A" class="backgroundBlackColor" >C 16 - N 1A</option>
+        <option value="C 17 - N 3B" class="backgroundBlackColor" >C 17 - N 3B</option>
+        <option value="C 18 – N1B S" class="backgroundBlackColor" >C 18 – N1BS</option>
+        <option value="C 19 - N 2A" class="backgroundBlackColor" >C 19 - N 2A</option>
+        <option value="C 20 - N 1B" class="backgroundBlackColor" >C 20 - N 1B</option>
+        <option value="C 21 - N 4A" class="backgroundBlackColor" >C 21 - N 4A</option>
+        <option value="C 22 - N 1A" class="backgroundBlackColor" >C 22 - N 1A</option>
+        <option value="C 23 - N 2B" class="backgroundBlackColor" >C 23 - N 2B</option>
+        <option value="C 24 - N 1B" class="backgroundBlackColor" >C 24 - N 1B</option>
+        <option value="C 25 - N 5B" class="backgroundBlackColor" >C 25 - N 5B</option>
+        <option value="C 25 bis - N 3B" class="backgroundBlackColor" >C 25 bis - N 3B</option>
+        <option value="C 26 - N 2B" class="backgroundBlackColor" >C 26 - N 2B</option>
+        <option value="C 27 - N 3B" class="backgroundBlackColor" >C 27 - N 3B</option>
+        <option value="C 28 - N 2A" class="backgroundBlackColor" >C 28 - N 2A</option>
+        <option value="C 29 - N 1A" class="backgroundBlackColor" >C 29 - N 1A</option>
+        <option value="C ADOS F" class="backgroundBlackColor" >C ADOS F</option>
+        <option value="C ADOS G1" class="backgroundBlackColor" >C ADOS G1</option>
+    </select>
+
+    <input type="submit" value="OK" name="submit" class="box-button">
+
+
+</form>
+
+</h1>
+
+
+<?php
+if($_POST['numClasseEleve']) {
+    $numClassChoisi = $_POST['numClasseEleve'];
+} else {
+    $numClassChoisi = "rien";
+}
+?>
+
+<p align="center" class="backgroundTitreColor"> Liste des <span>Elèves</span>
+    <?php
+        if($_POST['numClasseEleve'])
+            echo "de la classe <span>".$_POST['numClasseEleve']."</span>";
+        else
+            echo "de la classe <span> ...??.... </span>"
+    ?>
+</p>
         <!--<p>Les champs avec * sont obligatoires </p>-->
 
 
@@ -122,13 +191,12 @@ if (!isset($_SESSION['ADMIN_IS_CONNECT'])) {
     <thead>
     <tr>
         <th>Action</th>
-        <th data-field="identifiant" data-filter-control="input" data-sortable="true">Identifiant</th>
         <th data-filter-control="input" data-sortable="true">Nom</th>
         <th data-filter-control="input" data-sortable="true">Prenom</th>
         <th data-filter-control="input" data-sortable="true">Sexe</th>
         <th data-filter-control="input" data-sortable="true">Date Naissance</th>
-        <th data-filter-control="input" data-sortable="true">Type Cours</th>
-        <th data-filter-control="input" data-sortable="true">Classe année 2020</th>
+        <th data-filter-control="input" data-sortable="true">N° Téléphone du père</th>
+        <th data-filter-control="input" data-sortable="true">N° Téléphone de la mère</th>
     </tr>
     </thead>
     <tbody>
@@ -148,7 +216,7 @@ if (!isset($_SESSION['ADMIN_IS_CONNECT'])) {
 
 
 
-    $findAllElevesSql = "SELECT * from eleve";
+    $findAllElevesSql = "SELECT * from eleve where num_annee_prec_ici = '$numClassChoisi'";
     $listEleves = $mysqli->query($findAllElevesSql, MYSQLI_STORE_RESULT_COPY_DATA) ;
     if($listEleves) {
         $i = 0;
@@ -163,37 +231,35 @@ if (!isset($_SESSION['ADMIN_IS_CONNECT'])) {
             $dateNaiss = $eleve['date_naissance'];
             $numClass = $eleve['num_annee_prec_ici'];
 
+            // Recuperation Pere
+            $findPereSql = "SELECT * FROM parent where id_inscription = '$idInscription' and  sexe= 'M'";
+            $PereRes = $mysqli->query($findPereSql, MYSQLI_STORE_RESULT_COPY_DATA) ;
+            $pere = $PereRes->fetch_array();
+            if($pere) {
+                $portablePere = $pere['telephone_portable'];
+            } else {
+                $portablePere = "-";
+            }
 
-                    ?>
+            // Recuperation Mere
+            $findMereSql = "SELECT * FROM parent where id_inscription = '$idInscription' and  sexe= 'F'";
+            $MereRes = $mysqli->query($findMereSql, MYSQLI_STORE_RESULT_COPY_DATA);
+            $mere = $MereRes->fetch_array();
+            if ($mere) {
+                $portableMere = $mere['telephone_portable'];
+            } else {
+                $portableMere = "-";
+            }
+
+            ?>
                     <tr>
-                        <th>
-                            <img src="../ihm/images/icone-modif.png" title="modifier" alt="Modifier" onclick="modifierEleve(<?php echo('\''.$idInscription.'\'');?>);">
-                            <img src="../ihm/images/icone-delete.png" title="Suppression" alt="Suppression" onclick="supprimerEleve(<?php echo('\''.$idInscription.'\',\''.$prenom.'\',\''.$dateNaiss.'\'');?>);">
-
-                        </th>
-                        <td>
-                            <?php echo($idInscription);?> <br/>
-                            <select id="newIdInscription_<?php echo($id);?>" name="newIdInscription_<?php echo($id);?>" required>
-                                <?php
-                                for ($i = 0; $i < count($inscripTab); $i++) {
-                                    $inscr = $inscripTab[$i];
-                                    if($inscr['id'] == $idInscription) {
-                                        echo("<option value='-' selected> -> ".$inscr['id_fonc']."</option>");
-                                    } else {
-                                        echo("<option value='".$inscr['id']."'>".$inscr['id_fonc']."</option>");
-                                    }
-                                }
-                                ?>
-                            </select>
-
-                            <a onclick="deplacerVersInscription(<?php echo('\''.$idInscription .'\',\''.$id.'\',\''.$prenom.'\',\''.$dateNaiss.'\'');?>)">déplacer</a>
-                        </td>
+                        <th>     </th>
                         <th> <?php echo($nom);?> </th>
                         <td> <?php echo($prenom);?> </td>
                         <td> <?php echo($sexe);?></td>
                         <td><?php echo($dateNaiss);?> </td>
-                        <td><?php echo($typeCours);?></td>
-                        <td><?php echo($numClass);?></td>
+                        <td><?php echo($portablePere);?></td>
+                        <td><?php echo($portableMere);?></td>
                     </tr>
                     <?php
 

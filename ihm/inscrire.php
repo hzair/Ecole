@@ -206,21 +206,22 @@ if(!isset($_SESSION['idFoncInscription']) || !isset($_SESSION['idInscription']))
         <!-- Information parents -->
         <section id="inscrire" class="dark">
         <header class="title">
-          <h2>RENSEIGNEMENTS DES <span>PARENTS</span></h2>
+          <!--<h2>RENSEIGNEMENTS DES <span>PARENTS</span></h2>-->
             <?php  if(isset($_SESSION['idFoncInscription']) ) { ?>
                 Votre identifiant d'inscription <a data-toggle="popover" title="Merci de le garder, il vous permettera de modifier votre inscription en inscrivant d'autres enfants ou adultes par exemple"> (+) </a>
             <input type="text" id="idFoncInscription" name="idFoncInscription" class="identifiantinscription"
                    value="<?php
                        echo($_SESSION['idFoncInscription']);
                    } ?> " disabled>
-            <br/>
-            <i class="fa fa-calendar rdvColor" aria-hidden="true">
-
-            Pour valider l’inscription vous devez prendre un RDV en cliquant <a href="http://rdv.ecole.institutespoir.fr" onclick="window.open(this.href);return false">ICI</a> au plus tard le 25/05/2021
-            </i>
-
+            <?php
+            if(isset($_SESSION['insciptionFinalise']) && $_SESSION['insciptionFinalise'] == $_SESSION['idFoncInscription']) { ?>
+                <i class="fa fa-calendar rdvColor" aria-hidden="true">
+                    <a class="rdvColor" href="http://rdv.ecole.institutespoir.fr" onclick="window.open(this.href);return false"> Pour valider l’inscription vous devez prendre un RDV en cliquant ICI au plus tard le 25/05/2021 </a>
+                </i>
+            <?php } ?>
 
         </header>
+
         <div class="container">
           <div class="row">
               <div class="col-md-12 animated" data-animate="fadeInLeft">
@@ -238,8 +239,9 @@ if(!isset($_SESSION['idFoncInscription']) || !isset($_SESSION['idInscription']))
                       </div>
                   </div>
               </div>
+
               <div class="row backgroundRecap">
-                  <div class="col-md-8 animated" data-animate="fadeInLeft">
+                  <div class="col-md-4 animated" data-animate="fadeInLeft">
                     <div class="wrap animated" data-animate="fadeInDown">
                         <div class="col-md-12">
                             <address>
@@ -249,10 +251,16 @@ if(!isset($_SESSION['idFoncInscription']) || !isset($_SESSION['idInscription']))
                                 <?php if ($mere) { ?>
                                     <span><i class="fa fa-group fa-lg"></i> Mme <?php echo($mere["nom"]." ".$mere["prenom"]);?></span>
                                 <?php } ?>
-                                <span><i class="fa fa-phone fa-lg"></i>  <?php echo($telFixe);?></span>
+
                             </address>
                         </div>
                     </div>
+                  </div>
+                  <div class="col-md-4 animated" data-animate="fadeInRight">
+                      <address>
+                          <span><i class="fa fa-envelope-o fa-lg"></i> <?php echo($email);?></span>
+                          <span><i class="fa fa-phone fa-lg"></i>  <?php echo($telFixe);?></span>
+                      </address>
                   </div>
                   <div class="col-md-4 animated" data-animate="fadeInRight">
                       <address>
@@ -262,22 +270,21 @@ if(!isset($_SESSION['idFoncInscription']) || !isset($_SESSION['idInscription']))
                               &nbsp; &nbsp;  <?php } ?>
                               <?php if ($mere) { ?><i class="fa fa-mobile-phone fa-lg"></i> <?php echo($mere["telephone_portable"]); }?>
                           </span>
-                          <span><i class="fa fa-envelope-o fa-lg"></i> <?php echo($email);?></span>
                       </address>
                   </div>
               </div>
 
+              <?php $nbrInscripTotal = 0; ?>
 
               <div class="row">
                   <div class="col-md-12">
-                      <div class="col-md-12">
-                          <br/>
-                      </div>
+
                       <div class="col-md-6 animated" data-animate="fadeInLeft">
                           <div class="col-md-12">
                               Liste inscriptions enfants :
                           </div>
                           <?php
+
                                     $idInsciption_ = $_SESSION['idInscription'];
                                     $findEleveSql = "SELECT * from eleve where id_inscription='$idInsciption_' and type_cours='ENF'";
                                     $mysqli = new mysqli(USE_SERVER_BDD, USE_LOGIN_BDD, USE_PASS_BDD, USE_NAME_BDD);
@@ -286,6 +293,7 @@ if(!isset($_SESSION['idFoncInscription']) || !isset($_SESSION['idInscription']))
                                     if($result) {
                                         $i = 0;
                                         while ($data = mysqli_fetch_array($result)) {
+                                            $nbrInscripTotal++;
                                             $i++;
                                             $sexe = $data['sexe'];
                                             $prenom = $data['prenom'];
@@ -320,6 +328,7 @@ if(!isset($_SESSION['idFoncInscription']) || !isset($_SESSION['idInscription']))
                               if($result) {
                                   $i = 0;
                                   while ($data = mysqli_fetch_array($result)) {
+                                      $nbrInscripTotal++;
                                       $i++;
                                       $sexe = $data['sexe'];
                                       $prenom = $data['prenom'];
@@ -351,12 +360,8 @@ if(!isset($_SESSION['idFoncInscription']) || !isset($_SESSION['idInscription']))
 
               <div class="col-md-12 animated" data-animate="fadeInLeft">
                   <div class="wrap animated" data-animate="fadeInDown">
-                      <div class="col-md-12">
-                          <br/>
-                      </div>
-                      <div class="col-md-12">
-                          <br/>
-                      </div>
+
+
                       <div class="col-md-6">
                           <form action="ajouterEleves.php#eleves">
                             <button class="btn btn-default center-block submit" >Inscrire Enfant</button>
@@ -367,6 +372,43 @@ if(!isset($_SESSION['idFoncInscription']) || !isset($_SESSION['idInscription']))
                             <button class="btn btn-default center-block submit" href="#inscrirAdultes">Inscrire Adulte</button>
                           </form>
                       </div>
+
+
+                      <?php
+                      if(isset($_SESSION['insciptionFinalise']) && $_SESSION['insciptionFinalise'] == $_SESSION['idFoncInscription']) { ?>
+                          <div class="col-md-12 text-center">
+                              <i class="fa fa-info" aria-hidden="true">
+                                  &nbsp; Votre inscription est finalisée. N'oubliez pas de prendre un RDV comme indiqué ci-dessus
+                              </i>
+                          </div>
+                     <?php } else {
+                      ?>
+
+                      <?php
+                       if($nbrInscripTotal == 0) { ?>
+                          <div class="col-md-12 text-center">
+                              <p>
+                                  <i class="fa fa-warning rdvColor"></i>
+                                  Pour finaliser l'inscription, vous devez inscrir au moins un Enfant ou un Adulte
+                              </p>
+                          </div>
+                          <div class="col-md-12">
+                               <button class="btn btn-default center-block submit" href="#inscrirAdultes" disabled>Finaliser Inscription</button>
+                          </div>
+                      <?php
+                       } else { ?>
+                           <div class="col-md-12">
+                               <form method="post" action="finaliserInscription.php">
+                                   <INPUT TYPE='hidden' name='nomPere' value="<?php echo($pere["nom"]) ?>">
+                                   <INPUT TYPE='hidden' name='email' value="<?php echo($email) ?>">
+                                   <INPUT TYPE='hidden' name='returnPage' value="ihm/inscrire.php#inscrire">
+                                   <INPUT TYPE='hidden' name='returnErrorPage' value="ihm/inscrire.php#inscrire">
+                                   <button class="btn btn-default center-block submit" href="#inscrirAdultes" >Finaliser Inscription</button>
+                               </form>
+                           </div>
+                      <?php  }
+
+                      }?>
 
 
 

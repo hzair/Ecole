@@ -276,7 +276,7 @@ session_start();
                 </div>
                 <div class="col-md-12">
                   </br>
-                  <button class="btn btn-default center-block submit">Envoyer</button>
+                  <button class="btn btn-default center-block submit">Etape Suivante</button>
                 </div>
                 <div class="col-md-12" id="conditionIframe" style="display: none">
                     <iframe src="doc/conditions_d_inscription_et_du_reglement_2021-2022.pdf" width="90%" height="500" style="border: none;"></iframe>
